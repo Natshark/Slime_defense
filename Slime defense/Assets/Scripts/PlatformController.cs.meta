@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 85dbf5e0ca69c6b4cafda4620db22e85
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - CanvasOfTowerUI: {instanceID: 0}
+  - GameManager: {instanceID: 0}
+  - lastPressedPlatform: {instanceID: 0}
+  - platformParticle: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
