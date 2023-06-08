@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6151678248901077727}
   m_Layer: 0
   m_Name: rpgpp_lt_terrain_sand_01
-  m_TagString: Ground
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: b75a02a185084be49bc0ead09438de21, type: 3}
 --- !u!114 &6151678248901077727
@@ -115,3 +115,4 @@ MonoBehaviour:
   GameManager: {fileID: 0}
   lastPressedPlatform: {fileID: 0}
   platformParticle: {fileID: 6809944706259094419, guid: 0a3972e964dcd2b47b2a3bc58d35d554, type: 3}
+  CurrentPlatformParticle: {fileID: 0}

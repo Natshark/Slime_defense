@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class PlatformController : MonoBehaviour
 {
+    public GameObject Camera;
     public Canvas CanvasOfTowerUI;
     public GameManager GameManager;
     public GameObject lastPressedPlatform;
@@ -15,6 +16,7 @@ public class PlatformController : MonoBehaviour
     {
         CanvasOfTowerUI = GameObject.FindGameObjectWithTag("TowerUI").GetComponent<Canvas>();
         GameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        Camera = GameObject.FindGameObjectWithTag("MainCamera");
 
         CurrentPlatformParticle = Instantiate(platformParticle, transform.position, Quaternion.identity);
         CurrentPlatformParticle.GetComponent<ParticleSystem>().Stop();
@@ -28,28 +30,31 @@ public class PlatformController : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (CanvasOfTowerUI.enabled == true)
+        if(Camera.transform.parent == null)
         {
-            if (lastPressedPlatform == gameObject)
+            if (CanvasOfTowerUI.enabled == true)
             {
-                CanvasOfTowerUI.enabled = false;
-                CurrentPlatformParticle.GetComponent<ParticleSystem>().Stop();
+                if (lastPressedPlatform == gameObject)
+                {
+                    CanvasOfTowerUI.enabled = false;
+                    CurrentPlatformParticle.GetComponent<ParticleSystem>().Stop();
+                }
+                else
+                {
+                    if (lastPressedPlatform != null)
+                    {
+                        lastPressedPlatform.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
+                    }
+                    CurrentPlatformParticle.GetComponent<ParticleSystem>().Play();
+                }
             }
             else
             {
-                if (lastPressedPlatform != null)
-                { 
-                    lastPressedPlatform.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
-                }
+                CanvasOfTowerUI.enabled = true;
                 CurrentPlatformParticle.GetComponent<ParticleSystem>().Play();
             }
-        }
-        else
-        {
-            CanvasOfTowerUI.enabled = true;
-            CurrentPlatformParticle.GetComponent<ParticleSystem>().Play();
-        }
 
-        GameManager.lastPressedPlatform = gameObject;
+            GameManager.lastPressedPlatform = gameObject;
+        }
     }
 }

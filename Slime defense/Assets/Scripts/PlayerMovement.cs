@@ -5,9 +5,6 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 3f;
-    public float jumpPower = 200f;
-
-    public bool isGround;
 
     public Rigidbody rb;
 
@@ -40,25 +37,5 @@ public class PlayerMovement : MonoBehaviour
             transform.localPosition += transform.right * speed * Time.deltaTime;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGround == true)
-        {
-            rb.AddForce(transform.up * jumpPower);
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision) 
-    {
-        if (collision.gameObject.tag == "Ground") 
-        {
-            isGround = true;
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.tag == "Ground")
-        {
-            isGround = false;
-        }
     }
 }
