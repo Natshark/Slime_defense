@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PlatformController : MonoBehaviour
 {
@@ -37,6 +38,9 @@ public class PlatformController : MonoBehaviour
                 if (lastPressedPlatform == gameObject)
                 {
                     CanvasOfTowerUI.enabled = false;
+                    CanvasOfTowerUI.gameObject.transform.GetChild(0).GetComponent<Button>().enabled = false;
+                    CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
+
                     CurrentPlatformParticle.GetComponent<ParticleSystem>().Stop();
                 }
                 else
@@ -51,6 +55,8 @@ public class PlatformController : MonoBehaviour
             else
             {
                 CanvasOfTowerUI.enabled = true;
+                CanvasOfTowerUI.gameObject.transform.GetChild(0).GetComponent<Button>().enabled = true;
+                CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = true;
                 CurrentPlatformParticle.GetComponent<ParticleSystem>().Play();
             }
 
