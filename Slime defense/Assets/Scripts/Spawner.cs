@@ -10,8 +10,8 @@ public class Spawner : MonoBehaviour
     public List<Transform> globalGoals = new List<Transform> { };
     public List<Transform> localGoals;
 
-    float timer = 0.5f;
-    int counter = 100;
+    float timer = 0.1f;
+    int counter = 50;
     void Start()
     {
 
@@ -36,7 +36,7 @@ public class Spawner : MonoBehaviour
                 counter--;
             }
 
-            timer = 0.5f;
+            timer = 0.1f;
         }
         timer -= Time.deltaTime;
     }
