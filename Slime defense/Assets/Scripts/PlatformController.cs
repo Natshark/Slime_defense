@@ -13,6 +13,8 @@ public class PlatformController : MonoBehaviour
     public GameObject platformParticle;
     public GameObject CurrentPlatformParticle;
 
+    public bool hasTower = false;
+
     void Start()
     {
         CanvasOfTowerUI = GameObject.FindGameObjectWithTag("TowerUI").GetComponent<Canvas>();
@@ -31,6 +33,7 @@ public class PlatformController : MonoBehaviour
 
     void OnMouseDown()
     {
+        GameManager.hasTower = hasTower;
         if(Camera.transform.parent == null)
         {
             if (CanvasOfTowerUI.enabled == true)

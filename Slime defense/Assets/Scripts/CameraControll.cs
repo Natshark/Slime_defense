@@ -6,20 +6,20 @@ public class CameraControll : MonoBehaviour
 {
     private float mouseX;
     private float mouseY;
-    private float rotationX = 0.0f;
-    private float rotationY = 0.0f;
-
+    public float rotationX = 0.0f;
+    public float rotationY = 0.0f;
+    
 
     public float sensetivityMouse = 200f;
-
+    public Vector3 angles;
     public Transform Player;
+    public Transform Head;
 
     private void Start()
     {
-        Vector3 angles = transform.eulerAngles;
+        angles = transform.eulerAngles;
         rotationX = angles.x;
         rotationY = angles.y;
-        
     }
 
     private void Update()
@@ -30,11 +30,11 @@ public class CameraControll : MonoBehaviour
         rotationX -= mouseY;
         rotationY += mouseX;
 
-        rotationX = Mathf.Clamp(rotationX, -90.0f, 90.0f);
+        rotationX = Mathf.Clamp(rotationX, -30.0f, 30.0f);
 
         transform.rotation = Quaternion.Euler(rotationX, rotationY, 0);
 
-        float playerRotationY = rotationY - 180.0f;
-        Player.transform.rotation = Quaternion.Euler(0, playerRotationY, 0);
+        float playerRotationY = rotationY;
+        Player.rotation = Quaternion.Euler(0, playerRotationY, 0);
     }
 }

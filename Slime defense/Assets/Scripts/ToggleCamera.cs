@@ -6,6 +6,7 @@ public class ToggleCamera : MonoBehaviour
 {
     public GameObject player;
     public GameObject TowerUI;
+    public Transform PlaceForCamera;
     Vector3 startPosition = new Vector3 (30.18f, 28.5f, 11.2f);
     Quaternion startRotation;
     bool canvasActivity;
@@ -21,8 +22,12 @@ public class ToggleCamera : MonoBehaviour
             if (transform.parent == null)
             {
                 canvasActivity = TowerUI.GetComponent<Canvas>().enabled;
+                
                 transform.parent = player.transform;
-                transform.position = player.transform.position;
+                transform.localRotation = Quaternion.Euler(0, 0, 0);
+                GetComponent<CameraControll>().rotationX = 0;
+                GetComponent<CameraControll>().rotationY = 0;
+                transform.position = PlaceForCamera.position;
 
                 GetComponent<CameraControll>().enabled = true;
                 player.GetComponent<PlayerMovement>().enabled = true;

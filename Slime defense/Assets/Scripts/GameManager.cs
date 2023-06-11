@@ -9,22 +9,31 @@ public class GameManager : MonoBehaviour
     public Canvas CanvasOfTowerUI;
     public GameObject magicTower;
     public GameObject cannonTower;
+    public bool hasTower;
 
     public void createMagicTower()
     {
-        Instantiate(magicTower, lastPressedPlatform.transform.position, Quaternion.identity);
-        CanvasOfTowerUI.enabled = false;
-        CanvasOfTowerUI.gameObject.transform.GetChild(0).GetComponent<Button>().enabled = false;
-        CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
-        lastPressedPlatform.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
+        if (!hasTower) 
+        {
+            Instantiate(magicTower, lastPressedPlatform.transform.position, Quaternion.identity);
+            lastPressedPlatform.GetComponent<PlatformController>().hasTower = true;
+            CanvasOfTowerUI.enabled = false;
+            CanvasOfTowerUI.gameObject.transform.GetChild(0).GetComponent<Button>().enabled = false;
+            CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
+            lastPressedPlatform.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
+        }
     }
 
     public void createCannonTower()
     {
-        Instantiate(cannonTower, lastPressedPlatform.transform.position, Quaternion.identity);
-        CanvasOfTowerUI.enabled = false;
-        CanvasOfTowerUI.gameObject.transform.GetChild(0).GetComponent<Button>().enabled = false;
-        CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
-        lastPressedPlatform.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
+        if (!hasTower)
+        {
+            Instantiate(cannonTower, lastPressedPlatform.transform.position, Quaternion.identity);
+            lastPressedPlatform.GetComponent<PlatformController>().hasTower = true;
+            CanvasOfTowerUI.enabled = false;
+            CanvasOfTowerUI.gameObject.transform.GetChild(0).GetComponent<Button>().enabled = false;
+            CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
+            lastPressedPlatform.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
+        }
     }
 }
