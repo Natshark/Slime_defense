@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: dd348abba1e02f345a6c680df1666faa, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: f7627d4945b695943b00320df31d01e7, type: 2}
 --- !u!1001 &6746674
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9953,6 +9953,7 @@ MonoBehaviour:
   speed: 7
   rb: {fileID: 1069984504}
   animator: {fileID: 1069984507}
+  isMoving: 0
 --- !u!33 &1069984503
 MeshFilter:
   m_ObjectHideFlags: 0

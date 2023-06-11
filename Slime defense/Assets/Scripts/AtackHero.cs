@@ -27,6 +27,7 @@ public class AtackHero : MonoBehaviour
         {
             if (Camera.transform.parent != null)
             {
+                GetComponent<Animator>().speed = 1;
                 GetComponent<Animator>().Play("Attack01_SwordAndShiled");
                 CoolDownHit = 0f;
                 Sword.GetComponent<Sword>().LastHittedSlime = null;
