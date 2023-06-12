@@ -482,6 +482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27299c5283fcaf2449762fd7147d39c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Sword: {fileID: 0}
   goals: []
   counter: 0
   hp: 20

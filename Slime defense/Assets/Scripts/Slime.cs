@@ -16,18 +16,41 @@ public class Slime : MonoBehaviour
     public int counter = 0;
     bool hasDestination = false;
 
-    public int hp = 5;
+    public int hp = 20;
+    public float timeToDeath = 1.5f;
+
+    public bool isDead = false;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         Sword = GameObject.FindGameObjectWithTag("Sword");
+        
     }
 
     void Update()
     {
-        if (hp <= 0)
+        if (!isDead)
+        {
+            if (hp <= 0)
+            {
+                GetComponent<Animator>().speed = 0;
+                GetComponent<Animator>().Play("Die");
+                GetComponent<Animator>().speed = 1;
+
+                isDead = true;
+                timeToDeath -= Time.deltaTime;
+                navMeshAgent.destination = transform.position;
+                navMeshAgent.speed = 0;
+            }
+        }
+        else
+        {
+            timeToDeath -= Time.deltaTime;
+        }
+
+        if (timeToDeath <= 0)
         {
             Destroy(gameObject);
         }
@@ -44,13 +67,17 @@ public class Slime : MonoBehaviour
             counter++;
         }
 
-        if (counter != 6)
+        if (hp > 0)
         {
-            animator.Play("WalkFWD");
+            if (counter != 6)
+            {
+                animator.Play("WalkFWD");
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+        
     }
 }
