@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraControll : MonoBehaviour
+public class CameraRotation : MonoBehaviour
 {
     private float mouseX;
     private float mouseY;

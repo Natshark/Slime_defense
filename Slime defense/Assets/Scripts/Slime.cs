@@ -55,13 +55,13 @@ public class Slime : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (hasDestination == false && counter != 6)
+        if (hasDestination == false && counter != 7)
         {
             navMeshAgent.destination = goals[counter].position;
             hasDestination = true;
         }
 
-        if (counter != 6 && Mathf.Abs(transform.position.x - goals[counter].position.x) < 2.5f && Mathf.Abs(transform.position.z - goals[counter].position.z) < 2.5f && hasDestination == true)
+        if (counter != 7 && Mathf.Abs(transform.position.x - navMeshAgent.destination.x) < 2.5f && Mathf.Abs(transform.position.z - navMeshAgent.destination.z) < 2.5f && hasDestination == true)
         {
             hasDestination = false;
             counter++;
@@ -69,9 +69,13 @@ public class Slime : MonoBehaviour
 
         if (hp > 0)
         {
-            if (counter != 6)
+            if (counter != 7)
             {
-                animator.Play("WalkFWD");
+                if (animator.GetCurrentAnimatorStateInfo(0).fullPathHash.ToString() != "-1996668047")
+                {
+
+                    animator.Play("WalkFWD");
+                }
             }
             else
             {

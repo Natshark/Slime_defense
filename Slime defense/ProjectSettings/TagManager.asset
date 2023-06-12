@@ -8,18 +8,23 @@ TagManager:
   - TowerUI
   - Ground
   - Platform
+  - Slime
+  - Sword
+  - Fire
+  - Castle
+  - enemyBug
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Platform
   - Water
   - UI
   - TextLayer
+  - Tower
+  - 
+  - 
   - PostProcessingLayer
-  - 
-  - 
-  - 
   - 
   - 
   - 

@@ -25,11 +25,11 @@ public class ToggleCamera : MonoBehaviour
                 
                 transform.parent = player.transform;
                 transform.localRotation = Quaternion.Euler(0, 0, 0);
-                GetComponent<CameraControll>().rotationX = 0;
-                GetComponent<CameraControll>().rotationY = 0;
+                GetComponent<CameraRotation>().rotationX = 0;
+                GetComponent<CameraRotation>().rotationY = 0;
                 transform.position = PlaceForCamera.position;
 
-                GetComponent<CameraControll>().enabled = true;
+                GetComponent<CameraRotation>().enabled = true;
                 player.GetComponent<PlayerMovement>().enabled = true;
                 TowerUI.GetComponent<Canvas>().enabled = false;
                 Cursor.visible = false;
@@ -41,7 +41,7 @@ public class ToggleCamera : MonoBehaviour
                 transform.position = startPosition;
                 transform.rotation = startRotation;
 
-                GetComponent<CameraControll>().enabled = false;
+                GetComponent<CameraRotation>().enabled = false;
                 player.GetComponent<PlayerMovement>().enabled = false;
                 TowerUI.GetComponent<Canvas>().enabled = canvasActivity;
                 Cursor.visible = true;

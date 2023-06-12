@@ -31,7 +31,7 @@ public class PlatformController : MonoBehaviour
         lastPressedPlatform = GameManager.lastPressedPlatform;
     }
 
-    void OnMouseDown()
+    public void ParticleContoller()
     {
         GameManager.hasTower = hasTower;
         if(Camera.transform.parent == null)

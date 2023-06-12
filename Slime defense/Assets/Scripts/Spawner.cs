@@ -7,10 +7,12 @@ public class Spawner : MonoBehaviour
     public GameObject slime;
     public GameObject createdSlime;
 
-    public List<Transform> globalGoals = new List<Transform> { };
+    public List<Transform> globalGoalsNorth = new List<Transform> { };
+    public List<Transform> globalGoalsSouth = new List<Transform> { };
     public List<Transform> localGoals;
 
-    float timer = 0.05f;
+    float spawnCoolDown = 1.5f;
+    float timer;
     int counter = 100;
     void Start()
     {
@@ -24,9 +26,9 @@ public class Spawner : MonoBehaviour
             if (counter > 0)
             {
                 localGoals.Clear();
-                for (int i = 0; i < 6; i++)
+                for (int i = 0; i < 7; i++)
                 {
-                    localGoals.Add(globalGoals[i * 3 + Random.Range(0, 3)]);
+                    localGoals.Add(globalGoalsNorth[i * 3 + Random.Range(0, 3)]);
                 }
 
                 createdSlime = Instantiate(slime, transform.position, Quaternion.Euler(0, -90, 0));
@@ -35,7 +37,7 @@ public class Spawner : MonoBehaviour
                 counter--;
             }
 
-            timer = 0.05f;
+            timer = spawnCoolDown;
         }
         timer -= Time.deltaTime;
     }
