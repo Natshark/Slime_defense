@@ -40,6 +40,7 @@ public class Slime : MonoBehaviour
         {
             if (hp <= 0)
             {
+                GameManager.PlayerMoney += slimePrice;
                 GetComponent<Animator>().speed = 0;
                 GetComponent<Animator>().Play("Die");
                 healthBar.gameObject.SetActive(false);
@@ -60,7 +61,6 @@ public class Slime : MonoBehaviour
         if (timeToDeath <= 0)
         {
             Destroy(gameObject);
-            GameManager.PlayerMoney += slimePrice;
         }
 
         if (hasDestination == false && counter != 7)
