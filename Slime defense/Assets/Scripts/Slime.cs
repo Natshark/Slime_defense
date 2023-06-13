@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 public class Slime : MonoBehaviour
@@ -11,13 +11,16 @@ public class Slime : MonoBehaviour
     Animator animator;
     NavMeshAgent navMeshAgent;
 
+    public GameManager GameManager;
     public GameObject Sword;
+    public Slider healthBar;
     public List<Transform> goals;
     public int counter = 0;
     bool hasDestination = false;
 
     public int hp = 20;
     public float timeToDeath = 1.5f;
+    public int slimePrice = 10;
 
     public bool isDead = false;
 
@@ -26,18 +29,22 @@ public class Slime : MonoBehaviour
         animator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         Sword = GameObject.FindGameObjectWithTag("Sword");
-        
+        GameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 
     void Update()
     {
+        healthBar.value = hp;
+
         if (!isDead)
         {
             if (hp <= 0)
             {
                 GetComponent<Animator>().speed = 0;
                 GetComponent<Animator>().Play("Die");
+                healthBar.gameObject.SetActive(false);
                 GetComponent<Animator>().speed = 1;
+                
 
                 isDead = true;
                 timeToDeath -= Time.deltaTime;
@@ -53,6 +60,7 @@ public class Slime : MonoBehaviour
         if (timeToDeath <= 0)
         {
             Destroy(gameObject);
+            GameManager.PlayerMoney += slimePrice;
         }
 
         if (hasDestination == false && counter != 7)
@@ -82,6 +90,5 @@ public class Slime : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        
     }
 }
