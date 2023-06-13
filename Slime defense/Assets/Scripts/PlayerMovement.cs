@@ -29,6 +29,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void GetInput() 
     {
+        // Проверка на паузе ли игра
+        if (Time.timeScale == 0f) { return; }
+
         isMoving = false;
         // Проверка на зажатие
         if (Input.GetKey(KeyCode.W)) 

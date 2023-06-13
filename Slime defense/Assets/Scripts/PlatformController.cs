@@ -33,6 +33,9 @@ public class PlatformController : MonoBehaviour
 
     public void ParticleContoller()
     {
+        // Проверка на паузе ли игра
+        if (Time.timeScale == 0f) { return; }
+
         GameManager.hasTower = hasTower;
         if(Camera.transform.parent == null)
         {

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ToggleCamera : MonoBehaviour
@@ -17,7 +15,7 @@ public class ToggleCamera : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab) && Time.timeScale != 0f)
         {
             if (transform.parent == null)
             {

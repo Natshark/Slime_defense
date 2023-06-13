@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UIElements;
+
 
 public class AtackHero : MonoBehaviour
 {
@@ -23,7 +20,7 @@ public class AtackHero : MonoBehaviour
 
     void Attack()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && Time.timeScale != 0f)
         {
             if (Camera.transform.parent != null)
             {
