@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AtackHero : MonoBehaviour
 {
@@ -13,9 +14,26 @@ public class AtackHero : MonoBehaviour
     public GameObject createdCircle;
     public GameObject flameStrike;
 
+    public Text manaText;
+
     public bool is_R_pressed = false;
+
+    public float manaPlayer = 100.0f;
+    public float maxManaPlayer = 100.0f;
+    public float sunstrikePrice = 40.0f;
+
+    public float manaPerSecond = 1.0f;
+    public float nextManaRegenTime = 0.0f;
+
+    void Start()
+    {
+        InvokeRepeating("GiveManaPerSecond", 0.0f, 3F);
+    }
+
     void Update()
     {
+        manaText.text = manaPlayer.ToString();
+
         if (CoolDownHit <= 0 && GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).fullPathHash.ToString() != "-86853306")
         {
             SwordAttack();
@@ -46,7 +64,7 @@ public class AtackHero : MonoBehaviour
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Physics.Raycast(ray, out hittedObject, Mathf.Infinity, 1 << 8);
 
-            if (Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKeyDown(KeyCode.R) && manaPlayer >= sunstrikePrice)
             {
                 if (!is_R_pressed)
                 {
@@ -70,14 +88,22 @@ public class AtackHero : MonoBehaviour
 
                     if (Input.GetMouseButtonDown(0))
                     {
+                        manaPlayer -= sunstrikePrice;
                         Instantiate(flameStrike, createdCircle.transform.position, Quaternion.identity);
                         Destroy(createdCircle);
                         is_R_pressed = false;
                     }
                 }
             }
+        }
+    }
 
-            
+    void GiveManaPerSecond()
+    {
+        if (manaPlayer < maxManaPlayer)
+        {
+            manaPlayer += manaPerSecond;
+            nextManaRegenTime += 3.0f;
         }
     }
 }

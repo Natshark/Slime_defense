@@ -14,10 +14,6 @@ public class Spawner : MonoBehaviour
     float spawnCoolDown = 1.5f;
     float timer;
     int counter = 100;
-    void Start()
-    {
-
-    }
 
     void Update()
     {
