@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1385124323689208
+--- !u!1 &1369031296425274
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,25 +8,25 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4943765590059028}
-  - component: {fileID: 33969442268109768}
-  - component: {fileID: 23797300038975642}
-  - component: {fileID: 1091091915390929747}
-  - component: {fileID: 6151678248901077727}
-  m_Layer: 3
-  m_Name: rpgpp_lt_terrain_sand_01
-  m_TagString: Platform
+  - component: {fileID: 4252784401376168}
+  - component: {fileID: 33583730029358272}
+  - component: {fileID: 23009263249696568}
+  - component: {fileID: 2990403859837626276}
+  - component: {fileID: 419137570383713441}
+  m_Layer: 0
+  m_Name: rpgpp_lt_tree_pine_01
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4943765590059028
+--- !u!4 &4252784401376168
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1385124323689208}
+  m_GameObject: {fileID: 1369031296425274}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -35,21 +35,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &33969442268109768
+--- !u!33 &33583730029358272
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1385124323689208}
-  m_Mesh: {fileID: 4300000, guid: b75a02a185084be49bc0ead09438de21, type: 3}
---- !u!23 &23797300038975642
+  m_GameObject: {fileID: 1369031296425274}
+  m_Mesh: {fileID: 4300000, guid: 58c79ebc04f48c74fa4869c3f7d941fd, type: 3}
+--- !u!23 &23009263249696568
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1385124323689208}
+  m_GameObject: {fileID: 1369031296425274}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -85,36 +85,33 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1091091915390929747
-MeshCollider:
+--- !u!136 &2990403859837626276
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1385124323689208}
+  m_GameObject: {fileID: 1369031296425274}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: b75a02a185084be49bc0ead09438de21, type: 3}
---- !u!114 &6151678248901077727
-MonoBehaviour:
+  m_Radius: 1.7956971
+  m_Height: 8.133526
+  m_Direction: 1
+  m_Center: {x: 0.00636667, y: 4.066763, z: -0.35304582}
+--- !u!208 &419137570383713441
+NavMeshObstacle:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1385124323689208}
+  m_GameObject: {fileID: 1369031296425274}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85dbf5e0ca69c6b4cafda4620db22e85, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Camera: {fileID: 0}
-  CanvasOfTowerUI: {fileID: 0}
-  GameManager: {fileID: 0}
-  lastPressedPlatform: {fileID: 0}
-  platformParticle: {fileID: 6809944706259094419, guid: 0a3972e964dcd2b47b2a3bc58d35d554, type: 3}
-  CurrentPlatformParticle: {fileID: 0}
-  hasTower: 0
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.554, y: 4.0670004, z: 1.7960001}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.006, y: 4.0670004, z: -0.35300002}
+  m_TimeToStationary: 0.5

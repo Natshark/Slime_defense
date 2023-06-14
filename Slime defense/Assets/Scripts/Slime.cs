@@ -40,15 +40,16 @@ public class Slime : MonoBehaviour
         {
             if (hp <= 0)
             {
-                GameManager.PlayerMoney += slimePrice;
                 GetComponent<Animator>().speed = 0;
                 GetComponent<Animator>().Play("Die");
-                healthBar.gameObject.SetActive(false);
                 GetComponent<Animator>().speed = 1;
                 
 
                 isDead = true;
-                timeToDeath -= Time.deltaTime;
+                healthBar.gameObject.SetActive(false);
+
+                GameManager.PlayerMoney += slimePrice;
+
                 navMeshAgent.destination = transform.position;
                 navMeshAgent.speed = 0;
             }

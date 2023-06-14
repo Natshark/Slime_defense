@@ -20,10 +20,10 @@ TagManager:
   - Platform
   - Water
   - UI
-  - TextLayer
+  - Player
   - Tower
-  - 
-  - 
+  - Ground
+  - TextLayer
   - PostProcessingLayer
   - 
   - 

@@ -32,7 +32,7 @@ public class Missile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Slime")
+        if (other.gameObject.tag == "Slime" && other.gameObject.GetComponent<Slime>().hp > 0)
         {
             other.gameObject.GetComponent<Slime>().hp -= damage;
             other.gameObject.GetComponent<Animator>().speed = 0;

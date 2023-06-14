@@ -423,7 +423,7 @@ GameObject:
   - component: {fileID: 536075675}
   - component: {fileID: 536075677}
   - component: {fileID: 536075676}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Text (Legacy)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -837,6 +837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SettingsMenu: {fileID: 1994303217}
+  isSettings: 0
 --- !u!224 &1183237904 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9157779979541161936, guid: cfe2281e6fd8b4379b5d4cb25004d25a, type: 3}

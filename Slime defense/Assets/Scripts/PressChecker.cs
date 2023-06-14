@@ -7,10 +7,6 @@ public class PressChecker : MonoBehaviour
 
     RaycastHit hittedObject;
     Ray ray;
-    void Start()
-    {
-
-    }
 
     void Update()
     {
@@ -26,8 +22,5 @@ public class PressChecker : MonoBehaviour
                 }
             }
         }
-        
     }
-
-
 }
