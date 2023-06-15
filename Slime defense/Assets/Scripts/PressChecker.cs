@@ -16,7 +16,7 @@ public class PressChecker : MonoBehaviour
 
             if (Physics.Raycast(ray, out hittedObject, Mathf.Infinity, 1 << 3))
             {
-                if (hittedObject.collider.gameObject.tag == "Platform")
+                if (hittedObject.collider.gameObject.CompareTag("Platform"))
                 {
                     hittedObject.collider.gameObject.GetComponent<PlatformController>().ParticleContoller();
                 }

@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 2667945299997794621}
   m_Layer: 7
   m_Name: CanonTower
-  m_TagString: Untagged
+  m_TagString: CannonTower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

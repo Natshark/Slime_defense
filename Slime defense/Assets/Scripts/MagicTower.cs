@@ -14,6 +14,7 @@ public class MagicTower : MonoBehaviour
 
     public bool hasTarget = false;
 
+    public string typeOfDamage = "magic";
     public float attackCoolDown = 1;
     public float timer = 0;
 
@@ -33,6 +34,7 @@ public class MagicTower : MonoBehaviour
                 timer = attackCoolDown;
                 createdMissile = Instantiate(missile, placeForMissile.position, Quaternion.identity);
                 createdMissile.GetComponent<Missile>().target = target;
+                createdMissile.GetComponent<Missile>().typeOfDamage = typeOfDamage;
             }
         }
 

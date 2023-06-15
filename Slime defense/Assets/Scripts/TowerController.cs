@@ -15,7 +15,7 @@ public class TowerController : MonoBehaviour
 
     public bool hasTarget = false;
 
-    public float attackCoolDown = 1f;
+    public float attackCoolDown;
     public float timer = 0;
 
     public float minDistance;
@@ -25,6 +25,17 @@ public class TowerController : MonoBehaviour
     public List<GameObject> targets = new List<GameObject> { };
     public List<GameObject> realTargets = new List<GameObject> { };
 
+    private void Start()
+    {
+        if (CompareTag("CannonTower"))
+        {
+            attackCoolDown = 0.75f;
+        }
+        else
+        {
+            attackCoolDown = 1;
+        }
+    }
 
     void Update()
     {
@@ -78,7 +89,7 @@ public class TowerController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Slime" && !targets.Contains(other.gameObject))
+        if (other.gameObject.layer == 11 && !targets.Contains(other.gameObject))
         {
             targets.Add(other.gameObject);
         }
@@ -86,7 +97,7 @@ public class TowerController : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Slime" && targets.Contains(other.gameObject))
+        if (other.gameObject.layer == 11 && targets.Contains(other.gameObject))
         {
             targets.Remove(other.gameObject);
         }

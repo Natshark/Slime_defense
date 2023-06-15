@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,9 +17,12 @@ public class Slime : MonoBehaviour
     public int counter = 0;
     bool hasDestination = false;
 
-    public int hp = 20;
+    public float hp;
+    public float physicResistance;
+    public float magicResistance;
+
     public float timeToDeath = 1.5f;
-    public int slimePrice = 10;
+    public int slimePrice;
 
     public bool isDead = false;
 
@@ -30,6 +32,21 @@ public class Slime : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         Sword = GameObject.FindGameObjectWithTag("Sword");
         GameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+
+        if (CompareTag("RedSlime"))
+        {
+            hp = 20;
+            physicResistance = 0;
+            magicResistance = 0;
+            slimePrice = 10;
+        }
+        else
+        {
+            hp = 40;
+            physicResistance = 0.75f;
+            magicResistance = -0.25f;
+            slimePrice = 20;
+        }
     }
 
     void Update()
@@ -91,5 +108,21 @@ public class Slime : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+    }
+
+    public void GetDamage(float damage, string typeOfDamage)
+    {
+        if (typeOfDamage == "physic")
+        {
+            hp -= damage * (1 - physicResistance);
+        }
+        else
+        {
+            hp -= damage * (1 - magicResistance);
+        }
+
+        animator.speed = 0;
+        animator.Play("GetHit");
+        animator.speed = 1;
     }
 }

@@ -17,9 +17,9 @@ GameObject:
   - component: {fileID: 8206854}
   - component: {fileID: 13509832}
   - component: {fileID: 2559742293113927362}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Meteor
-  m_TagString: Untagged
+  m_TagString: Meteor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -239,7 +239,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 31dbe1f047a081845bd95a5b256ee829, type: 3}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
@@ -359,7 +359,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 164416}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1
@@ -380,3 +380,4 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 0, z: 0}
   damage: 5
   speed: 0.5
+  typeOfDamage: 

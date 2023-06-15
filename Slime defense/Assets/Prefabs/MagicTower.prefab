@@ -295,7 +295,7 @@ GameObject:
   - component: {fileID: 4149773243946338112}
   m_Layer: 7
   m_Name: MagicTower
-  m_TagString: Untagged
+  m_TagString: MagicTower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

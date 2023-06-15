@@ -8,11 +8,23 @@ public class Missile : MonoBehaviour
     public GameObject target = null;
     public Vector3 targetPosition;
 
-    public int damage = 5;
-    public float speed = 0.5f;
+    public float damage;
+    public float speed;
+    public string typeOfDamage;
     void Start()
     {
-        
+        if (CompareTag("Bullet"))
+        {
+            damage = 5f;
+            speed = 0.25f;
+            typeOfDamage = "physic";
+        }
+        else
+        {
+            damage = 10f;
+            speed = 0.5f;
+            typeOfDamage = "magic";
+        }
     }
 
     void FixedUpdate()
@@ -32,12 +44,9 @@ public class Missile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Slime" && other.gameObject.GetComponent<Slime>().hp > 0)
+        if (other.gameObject.layer == 11 && other.gameObject.GetComponent<Slime>().hp > 0)
         {
-            other.gameObject.GetComponent<Slime>().hp -= damage;
-            other.gameObject.GetComponent<Animator>().speed = 0;
-            other.gameObject.GetComponent<Animator>().Play("GetHit");
-            other.gameObject.GetComponent<Animator>().speed = 1;
+            other.gameObject.GetComponent<Slime>().GetDamage(damage, typeOfDamage);
             Destroy(gameObject);
         }
     }

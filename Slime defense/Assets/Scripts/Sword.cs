@@ -8,16 +8,15 @@ public class Sword : MonoBehaviour
     public GameObject LastHittedSlime;
 
     public int damage = 5;
+    public string typeOfDamage = "physic";
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Slime" && other.gameObject.GetComponent<Slime>().hp > 0 && Player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).fullPathHash.ToString() == "1011701323")
+        if (other.gameObject.layer == 11 && other.gameObject.GetComponent<Slime>().hp > 0 && Player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).fullPathHash.ToString() == "1011701323")
         {
             if (LastHittedSlime != other.gameObject)
             {
-                other.gameObject.GetComponent<Slime>().hp -= damage;
-                other.gameObject.GetComponent<Animator>().speed = 0;
-                other.gameObject.GetComponent<Animator>().Play("GetHit");
-                other.gameObject.GetComponent<Animator>().speed = 1;
+                other.gameObject.GetComponent<Slime>().GetDamage(damage, typeOfDamage);
+                
                 LastHittedSlime = other.gameObject;
             }
         }

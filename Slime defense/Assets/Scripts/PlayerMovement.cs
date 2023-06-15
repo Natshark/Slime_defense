@@ -5,17 +5,18 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 35000;
+    public float speed = 35;
     public Rigidbody rb;
     public Animator animator;
 
     public bool isMoving = false;
 
-    private void FixedUpdate()
+    void Start()
     {
-        
+        speed *= 1000;
     }
-    private void Update()
+
+    void Update()
     {
         GetInput();
 
@@ -41,28 +42,24 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.W)) 
         {
             // Текущая позиция объекта скрипта += вектор вперед * скорость * deltaTime
-            //transform.localPosition += transform.forward * speed * Time.deltaTime;
             rb.AddForce(transform.forward * speed * Time.deltaTime);
             isMoving = true;
         }
 
         if (Input.GetKey(KeyCode.S))
         {
-            //transform.localPosition += -transform.forward * speed * Time.deltaTime;
             rb.AddForce(-transform.forward * speed * Time.deltaTime);
             isMoving = true;
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            //transform.localPosition += transform.right * speed * Time.deltaTime;
             rb.AddForce(transform.right * speed * Time.deltaTime);
             isMoving = true;
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            //transform.localPosition += -transform.right * speed * Time.deltaTime;
             rb.AddForce(-transform.right * speed * Time.deltaTime);
             isMoving = true;
         }

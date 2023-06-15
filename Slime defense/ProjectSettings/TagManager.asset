@@ -8,11 +8,17 @@ TagManager:
   - TowerUI
   - Ground
   - Platform
-  - Slime
   - Sword
   - Fire
   - Castle
   - enemyBug
+  - MagicTower
+  - RedSlime
+  - Undefined
+  - BlueSlime
+  - Meteor
+  - Bullet
+  - CannonTower
   layers:
   - Default
   - TransparentFX
@@ -25,7 +31,7 @@ TagManager:
   - Ground
   - TextLayer
   - PostProcessingLayer
-  - 
+  - Slime
   - 
   - 
   - 

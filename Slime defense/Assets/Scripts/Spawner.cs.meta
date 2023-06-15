@@ -3,7 +3,11 @@ guid: 1a2a6805f4632e74685584e3ec311745
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - redSlime: {fileID: 3101777003913107582, guid: 9d81a017ed1ccd54a8e044052aa5dc35, type: 3}
+  - blueSlime: {fileID: 1774625739149480, guid: 8b1f09a2ff9da004da9fdcae9ebb51fa, type: 3}
+  - chosenSlime: {instanceID: 0}
+  - createdSlime: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
