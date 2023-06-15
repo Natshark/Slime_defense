@@ -6,7 +6,10 @@ public class GameManager : MonoBehaviour
 {
     public GameObject lastPressedPlatform;
     public Canvas CanvasOfTowerUI;
+
     public GameObject PauseUI;
+    public GameObject LoseGameUI;
+
     public GameObject magicTower;
     public GameObject cannonTower;
     public GameObject SettingsMenu;
@@ -18,11 +21,16 @@ public class GameManager : MonoBehaviour
     public int PlayerMoney;
     public Text moneyText;
 
+    public Text homeHpText;
+    public int homeHp = 100;
+
     public int magicTowerPrice = 50;
     public int cannonTowerPrice = 30;
 
     void Start()
     {
+        Time.timeScale = 1.0f;
+
         PlayerMoney = 0;
         isPaused = false;
         isSettings = false;
@@ -31,6 +39,13 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         moneyText.text = PlayerMoney.ToString();
+        homeHpText.text = homeHp.ToString();
+
+        if (homeHp <= 0)
+        {
+            GameLose();
+        }
+
         if (Input.GetKeyDown(KeyCode.Escape)) 
         {
 
@@ -142,5 +157,19 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1.0f;
+    }
+
+    public void GameLose()
+    {
+        Time.timeScale = 0.0f;
+        isPaused = true;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        CanvasOfTowerUI.gameObject.transform.GetChild(0).GetComponent<Button>().enabled = false;
+        CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
+
+        LoseGameUI.SetActive(true);
     }
 }

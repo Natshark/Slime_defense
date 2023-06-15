@@ -106,6 +106,7 @@ public class Slime : MonoBehaviour
             else
             {
                 Destroy(gameObject);
+                GameManager.homeHp -= 10;
             }
         }
     }
