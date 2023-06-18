@@ -14,21 +14,25 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         speed *= 1000;
+        animator = GetComponent<Animator>();
     }
 
     void Update()
     {
-        GetInput();
+        if (!GetComponent<Player>().isDead)
+        {
+            GetInput();
 
-        if (isMoving)
-        {
-            animator.Play("MoveFWD_Battle_InPlace_SwordAndShield");
-        }
-        else if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).fullPathHash.ToString() != "1011701323")
-        {
-            GetComponent<Animator>().speed = 0;
-            animator.Play("Idle_Battle_SwordAndShield");
-            GetComponent<Animator>().speed = 1;
+            if (isMoving)
+            {
+                animator.Play("MoveFWD_Battle_InPlace_SwordAndShield");
+            }
+            else if (animator.GetCurrentAnimatorStateInfo(0).fullPathHash.ToString() != "1011701323")
+            {
+                animator.speed = 0;
+                animator.Play("Idle_Battle_SwordAndShield");
+                animator.speed = 1;
+            }
         }
     }
 

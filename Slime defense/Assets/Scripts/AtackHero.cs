@@ -5,7 +5,8 @@ public class AtackHero : MonoBehaviour
 {
     public GameObject Sword;
 
-    public float CoolDownHit = 0f;
+    public float CoolDownHit = 1;
+    public float timer = 1;
 
     RaycastHit hittedObject;
     Ray ray;
@@ -34,13 +35,21 @@ public class AtackHero : MonoBehaviour
     {
         manaText.text = manaPlayer.ToString();
 
-        if (CoolDownHit <= 0 && GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).fullPathHash.ToString() != "-86853306")
+        if (timer < 0)
         {
-            SwordAttack();
-        }
+            if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).fullPathHash.ToString() != "-86853306")
+            {
+                SwordAttack();
+            }
 
-        Sunstrike();
-        CoolDownHit -= Time.deltaTime;
+            Sunstrike();
+
+            timer = CoolDownHit;
+        }
+        else
+        {
+            timer -= Time.deltaTime;
+        }
     }
 
     void SwordAttack()

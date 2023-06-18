@@ -8,23 +8,35 @@ using static System.Runtime.CompilerServices.RuntimeHelpers;
 public class Slime : MonoBehaviour
 {
     Animator animator;
-    NavMeshAgent navMeshAgent;
+    public NavMeshAgent navMeshAgent;
+
+    Vector3 currentRoadDestination;
 
     public GameManager GameManager;
     public GameObject Sword;
+    public GameObject target;
+    public GameObject Player;
     public Slider healthBar;
     public List<Transform> goals;
     public int counter = 0;
+    public int areaMask = 1 << 0;
     bool hasDestination = false;
 
     public float hp;
     public float physicResistance;
     public float magicResistance;
+    public float damage;
+    public float damageToHome;
 
     public float timeToDeath = 1.5f;
+    public float attackCoolDown = 2f;
+    public float timer = 0;
+    public float dist;
     public int slimePrice;
 
+    public bool isPlayerInAttackZone = false;
     public bool isDead = false;
+
 
     void Start()
     {
@@ -32,12 +44,15 @@ public class Slime : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         Sword = GameObject.FindGameObjectWithTag("Sword");
         GameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        Player = GameObject.FindGameObjectWithTag("Player");
 
         if (CompareTag("RedSlime"))
         {
             hp = 20;
             physicResistance = 0;
             magicResistance = 0;
+            damage = 20;
+            damageToHome = 10;
             slimePrice = 10;
         }
         else
@@ -45,6 +60,8 @@ public class Slime : MonoBehaviour
             hp = 40;
             physicResistance = 0.75f;
             magicResistance = -0.25f;
+            damage = 50;
+            damageToHome = 20;
             slimePrice = 20;
         }
     }
@@ -57,58 +74,101 @@ public class Slime : MonoBehaviour
         {
             if (hp <= 0)
             {
-                GetComponent<Animator>().speed = 0;
-                GetComponent<Animator>().Play("Die");
-                GetComponent<Animator>().speed = 1;
-                
+                animator.speed = 0;
+                animator.Play("Die");
+                animator.speed = 1;
+
 
                 isDead = true;
                 healthBar.gameObject.SetActive(false);
+
+                if (target != null)
+                {
+                    Player.GetComponent<Player>().triggerredSlime = null;
+                }
+                target = null;
 
                 GameManager.PlayerMoney += slimePrice;
 
                 navMeshAgent.destination = transform.position;
                 navMeshAgent.speed = 0;
             }
-        }
-        else
-        {
-            timeToDeath -= Time.deltaTime;
-        }
-
-        if (timeToDeath <= 0)
-        {
-            Destroy(gameObject);
-        }
-
-        if (hasDestination == false && counter != 7)
-        {
-            navMeshAgent.destination = goals[counter].position;
-            hasDestination = true;
-        }
-
-        if (counter != 7 && Mathf.Abs(transform.position.x - navMeshAgent.destination.x) < 2.5f && Mathf.Abs(transform.position.z - navMeshAgent.destination.z) < 2.5f && hasDestination == true)
-        {
-            hasDestination = false;
-            counter++;
-        }
-
-        if (hp > 0)
-        {
-            if (counter != 7)
+            else if (counter != 7)
             {
-                if (animator.GetCurrentAnimatorStateInfo(0).fullPathHash.ToString() != "-1996668047")
-                {
+                navMeshAgent.speed = 3.5f;
 
+                if (Player.GetComponent<Player>().triggerredSlime != gameObject)
+                {
+                    if (!hasDestination)
+                    {
+                        currentRoadDestination = goals[counter].position;
+                        hasDestination = true;
+                    }
+                    else if (Mathf.Abs(transform.position.x - navMeshAgent.destination.x) < 2.5f && Mathf.Abs(transform.position.z - navMeshAgent.destination.z) < 2.5f)
+                    {
+                        navMeshAgent.areaMask = 1 << 0;
+                        hasDestination = false;
+                        counter++;
+                    }
+
+                    navMeshAgent.destination = currentRoadDestination;
+                }
+                else
+                {
+                    navMeshAgent.areaMask = 1 << 0 | 1 << 3;
+
+                    attackZoneCheck();
+
+                    if (!isPlayerInAttackZone)
+                    {
+                        navMeshAgent.destination = Player.transform.position;
+                    }
+                    else if (timer <= 0)
+                    {
+                        navMeshAgent.speed = 0f;
+                        transform.LookAt(target.transform);
+
+                        animator.speed = 0;
+                        animator.Play("Attack01");
+                        animator.speed = 1;
+
+                        timer = attackCoolDown;
+                    }
+                }
+
+                if (animator.GetCurrentAnimatorStateInfo(0).fullPathHash.ToString() != "-1996668047" && animator.GetCurrentAnimatorStateInfo(0).fullPathHash.ToString() != "-1520425993")
+                {
                     animator.Play("WalkFWD");
                 }
             }
             else
             {
+                if (Player.GetComponent<Player>().triggerredSlime != gameObject)
+                {
+                    Player.GetComponent<Player>().triggerredSlime = null;
+                }
+
                 Destroy(gameObject);
-                GameManager.homeHp -= 10;
+                if (GameManager.homeHp > 0)
+                {
+                    GameManager.homeHp -= damageToHome;
+                }
             }
         }
+        else
+        {
+            timeToDeath -= Time.deltaTime;
+            if (timeToDeath <= 0)
+            {
+                if (Player.GetComponent<Player>().triggerredSlime != gameObject)
+                {
+                    Player.GetComponent<Player>().triggerredSlime = null;
+                }
+                Destroy(gameObject);
+            }
+        }
+
+        timer -= Time.deltaTime;
     }
 
     public void GetDamage(float damage, string typeOfDamage)
@@ -125,5 +185,27 @@ public class Slime : MonoBehaviour
         animator.speed = 0;
         animator.Play("GetHit");
         animator.speed = 1;
+    }
+
+    void attackZoneCheck()
+    {
+        dist = Vector3.Distance(transform.position, target.transform.position);
+
+        if (dist > 3f)
+        {
+            isPlayerInAttackZone = false;
+        }
+        else
+        {
+            isPlayerInAttackZone = true;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.GetComponent<Player>().hp -= damage;
+        }
     }
 }

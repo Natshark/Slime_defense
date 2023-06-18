@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     public Text moneyText;
 
     public Text homeHpText;
-    public int homeHp = 100;
+    public float homeHp = 100;
 
     public int magicTowerPrice = 50;
     public int cannonTowerPrice = 30;

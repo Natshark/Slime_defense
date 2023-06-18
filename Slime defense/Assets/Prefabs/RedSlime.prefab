@@ -471,16 +471,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27299c5283fcaf2449762fd7147d39c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  navMeshAgent: {fileID: 0}
   GameManager: {fileID: 0}
   Sword: {fileID: 0}
+  target: {fileID: 0}
   healthBar: {fileID: 3102250705500040075}
   goals: []
   counter: 0
+  areaMask: 0
   hp: 20
   physicResistance: 0
   magicResistance: 0
+  damage: 0
+  damageToHome: 0
   timeToDeath: 2
+  attackCoolDown: 2
+  timer: 0
+  dist: 0
   slimePrice: 10
+  isPlayerInAttackZone: 0
   isDead: 0
 --- !u!1 &3102250705500040073
 GameObject:

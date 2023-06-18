@@ -7251,7 +7251,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &550116546
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7259,7 +7259,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 550116545}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 42c5b17aa699ab24981a1ab5a8f11199, type: 3}
@@ -11811,7 +11811,6 @@ RectTransform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1071689751}
   - {fileID: 155408985}
   m_Father: {fileID: 710115317}
   m_RootOrder: -1
@@ -12625,7 +12624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be417391a1591114385b2118323e2208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1069984500}
+  Player: {fileID: 1069984500}
   TowerUI: {fileID: 1742353025}
   PlaceForCamera: {fileID: 285395125}
 --- !u!114 &963194232
@@ -13830,6 +13829,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Sword: {fileID: 904759651}
   CoolDownHit: 0
+  timer: 1
   prefabCircle: {fileID: 7994801950563738793, guid: baa0358f23de56f499693e4ae672624c, type: 3}
   createdCircle: {fileID: 0}
   flameStrike: {fileID: 132746, guid: b86c5b2aa8096224886b7d41a74230ac, type: 3}
@@ -13862,19 +13862,22 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!135 &1069984510
-SphereCollider:
+--- !u!114 &1069984512
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1069984500}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 5
-  m_Center: {x: 0, y: 0.8, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64e5ce061bc0bc14ba9566ea1433fbed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 100
+  isDead: 0
+  triggerredSlime: {fileID: 0}
+  slimes: []
 --- !u!1001 &1073312405
 PrefabInstance:
   m_ObjectHideFlags: 0

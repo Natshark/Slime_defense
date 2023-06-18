@@ -13,7 +13,7 @@ public class Spawner : MonoBehaviour
     public List<Transform> globalGoalsSouth = new List<Transform> { };
     public List<Transform> localGoals;
 
-    float spawnCoolDown = 1.5f;
+    float spawnCoolDown = 2f;
     float timer;
     int counter = 100;
 
