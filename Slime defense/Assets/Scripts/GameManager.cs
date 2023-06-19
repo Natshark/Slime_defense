@@ -27,6 +27,14 @@ public class GameManager : MonoBehaviour
     public int magicTowerPrice = 50;
     public int cannonTowerPrice = 30;
 
+    public float userSensitivity;
+    public float gameVolume;
+    public CameraRotation CameraRotation;
+    public GameObject AudioManager;
+
+    public Slider SensitivitySlider;
+    public Slider VolumeSlider;
+
     void Start()
     {
         Time.timeScale = 1.0f;
@@ -144,6 +152,24 @@ public class GameManager : MonoBehaviour
         {
             SettingsMenu.SetActive(true);
             isSettings = true;
+
+            if (PlayerPrefs.HasKey("UserSens"))
+            {
+                SensitivitySlider.value = PlayerPrefs.GetFloat("UserSens");
+            }
+            else
+            {
+                SensitivitySlider.value = 5.0f;
+            }
+
+            if (PlayerPrefs.HasKey("GameVolume"))
+            {
+                VolumeSlider.value = PlayerPrefs.GetFloat("GameVolume");
+            }
+            else
+            {
+                VolumeSlider.value = 1.0f;
+            }
         }
         else
         {
@@ -171,5 +197,12 @@ public class GameManager : MonoBehaviour
         CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
 
         LoseGameUI.SetActive(true);
+    }
+    public void SavePrefs()
+    {
+        PlayerPrefs.SetFloat("UserSens", SensitivitySlider.value);
+        PlayerPrefs.SetFloat("GameVolume", VolumeSlider.value);
+        Camera.main.GetComponent<CameraRotation>().sensetivityMouse = PlayerPrefs.GetFloat("UserSens") * 50;
+        AudioListener.volume = PlayerPrefs.GetFloat("GameVolume");
     }
 }
