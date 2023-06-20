@@ -18,11 +18,15 @@ public class Player : MonoBehaviour
     public float timer;
 
     public Text playerHpText;
+    public float hpPerSecond = 1.0f;
+    public float nextHpRegenTime = 0.0f;
+    public float maxHpPlayer = 100.0f;
 
     string temp = "a", a;
     void Start()
     {
         animator = GetComponent<Animator>();
+        InvokeRepeating("hpRegeneration", 0.0f, 3F);
     }
 
     void Update()
@@ -96,6 +100,15 @@ public class Player : MonoBehaviour
             animator.speed = 0;
             animator.Play("GetUp_SwordAndShield");
             animator.speed = 1;
+        }
+    }
+
+    public void hpRegeneration()
+    {
+        if (hp < maxHpPlayer)
+        {
+            hp += hpPerSecond;
+            nextHpRegenTime += 3.0f;
         }
     }
 }

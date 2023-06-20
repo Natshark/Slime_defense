@@ -222,7 +222,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                SensitivitySlider.value = 5.0f;
+                SensitivitySlider.value = 1.0f;
             }
 
             if (PlayerPrefs.HasKey("GameVolume"))
@@ -267,7 +267,7 @@ public class GameManager : MonoBehaviour
     {
         PlayerPrefs.SetFloat("UserSens", SensitivitySlider.value);
         PlayerPrefs.SetFloat("GameVolume", VolumeSlider.value);
-        Camera.main.GetComponent<CameraRotation>().sensetivityMouse = PlayerPrefs.GetFloat("UserSens") * 50;
+        Camera.main.GetComponent<CameraRotation>().sensetivityMouse = PlayerPrefs.GetFloat("UserSens");
         AudioListener.volume = PlayerPrefs.GetFloat("GameVolume");
     }
 }
