@@ -1,24 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-
-    Animator animator;
+    public Animator animator;
 
     public float hp = 100;
     public bool isDead = false;
 
     public GameObject triggerredSlime = null;
-    GameObject closestSlime = null;
+    public GameObject closestSlime = null;
     public GameObject[] slimes;
-    float mindist;
-    float curdist;
+    public float mindist;
+    public float curdist;
 
-    float deathCoolDown = 1f;
-    float timer;
+    public float deathCoolDown = 10f;
+    public float timer;
+
+    public Text playerHpText;
 
     string temp = "a", a;
     void Start()
@@ -34,6 +33,7 @@ public class Player : MonoBehaviour
             Debug.Log(a);
             temp = a;
         }
+        playerHpText.text = hp.ToString();
 
         if (!isDead)
         {
