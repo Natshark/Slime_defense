@@ -31,7 +31,8 @@ public class Slime : MonoBehaviour
     public float timeToDeath = 1.5f;
     public float attackCoolDown = 2f;
     public float timer = 0;
-    public float dist;
+    public float curDist;
+    public float minAttackDist;
     public int slimePrice;
 
     public bool isPlayerInAttackZone = false;
@@ -54,6 +55,7 @@ public class Slime : MonoBehaviour
             damage = 20;
             damageToHome = 10;
             slimePrice = 10;
+            minAttackDist = 2f;
         }
         else
         {
@@ -63,6 +65,7 @@ public class Slime : MonoBehaviour
             damage = 50;
             damageToHome = 20;
             slimePrice = 20;
+            minAttackDist = 2.5f;
         }
     }
 
@@ -132,7 +135,7 @@ public class Slime : MonoBehaviour
                         animator.Play("Attack01");
                         animator.speed = 1;
 
-                        timer = attackCoolDown;
+                        //timer = attackCoolDown;
                     }
                 }
 
@@ -189,9 +192,9 @@ public class Slime : MonoBehaviour
 
     void attackZoneCheck()
     {
-        dist = Vector3.Distance(transform.position, target.transform.position);
+        curDist = Vector3.Distance(transform.position, target.transform.position);
 
-        if (dist > 3f)
+        if (curDist > minAttackDist)
         {
             isPlayerInAttackZone = false;
         }
@@ -203,9 +206,33 @@ public class Slime : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" && timer < 0)
         {
+            if (Player.GetComponent<Player>().triggerredSlime != gameObject)
+            {
+                animator.speed = 0;
+                animator.Play("Attack01");
+                animator.speed = 1;
+            }
+
             collision.gameObject.GetComponent<Player>().hp -= damage;
+            timer = attackCoolDown;
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player" && timer < 0)
+        {
+            if (Player.GetComponent<Player>().triggerredSlime != gameObject)
+            {
+                animator.speed = 0;
+                animator.Play("Attack01");
+                animator.speed = 1;
+            }
+
+            collision.gameObject.GetComponent<Player>().hp -= damage;
+            timer = attackCoolDown;
         }
     }
 }

@@ -17,9 +17,10 @@ public class Player : MonoBehaviour
     float mindist;
     float curdist;
 
-    float deathCoolDown = 10f;
+    float deathCoolDown = 1f;
     float timer;
 
+    string temp = "a", a;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -27,6 +28,13 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        a = animator.GetCurrentAnimatorStateInfo(0).fullPathHash.ToString();
+        if (temp != a)
+        {
+            Debug.Log(a);
+            temp = a;
+        }
+
         if (!isDead)
         {
             if (hp <= 0)

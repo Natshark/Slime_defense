@@ -13828,7 +13828,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Sword: {fileID: 904759651}
-  CoolDownHit: 0
+  CoolDownHit: 0.5
   timer: 1
   prefabCircle: {fileID: 7994801950563738793, guid: baa0358f23de56f499693e4ae672624c, type: 3}
   createdCircle: {fileID: 0}

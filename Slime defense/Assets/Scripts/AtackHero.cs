@@ -5,8 +5,8 @@ public class AtackHero : MonoBehaviour
 {
     public GameObject Sword;
 
-    public float CoolDownHit = 1;
-    public float timer = 1;
+    public float CoolDownHit = 0.5f;
+    public float timer = 0;
 
     RaycastHit hittedObject;
     Ray ray;
@@ -43,8 +43,6 @@ public class AtackHero : MonoBehaviour
             }
 
             Sunstrike();
-
-            timer = CoolDownHit;
         }
         else
         {
@@ -60,10 +58,23 @@ public class AtackHero : MonoBehaviour
             {
                 GetComponent<Animator>().speed = 1;
                 GetComponent<Animator>().Play("Attack01_SwordAndShiled");
-                CoolDownHit = 0f;
+
                 Sword.GetComponent<Sword>().LastHittedSlime = null;
+                timer = CoolDownHit;
             }
         } 
+    }
+
+    void Defend()
+    {
+        if (Input.GetMouseButtonDown(1) && Time.timeScale != 0f && !is_R_pressed)
+        {
+            if (Camera.main.transform.parent != null)
+            {
+                GetComponent<Animator>().speed = 1;
+                GetComponent<Animator>().Play("Defend_SwordAndShield");
+            }
+        }
     }
 
     void Sunstrike()
@@ -101,6 +112,7 @@ public class AtackHero : MonoBehaviour
                         Instantiate(flameStrike, createdCircle.transform.position, Quaternion.identity);
                         Destroy(createdCircle);
                         is_R_pressed = false;
+                        timer = CoolDownHit;
                     }
                 }
             }

@@ -10,7 +10,6 @@ public class PlayerMovement : MonoBehaviour
     public Animator animator;
 
     public bool isMoving = false;
-
     void Start()
     {
         speed *= 1000;
@@ -29,9 +28,9 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (animator.GetCurrentAnimatorStateInfo(0).fullPathHash.ToString() != "1011701323")
             {
-                animator.speed = 0;
+                /*animator.speed = 0;
                 animator.Play("Idle_Battle_SwordAndShield");
-                animator.speed = 1;
+                animator.speed = 1;*/
             }
         }
     }

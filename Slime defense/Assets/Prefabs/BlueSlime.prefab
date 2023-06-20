@@ -802,7 +802,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4906828391645816}
   - component: {fileID: 95237074988894122}
-  - component: {fileID: 1562419970010492191}
+  - component: {fileID: 1944571561962759010}
   - component: {fileID: -8418829614824300045}
   - component: {fileID: -2402113279582032114}
   - component: {fileID: 6870570701523274949}
@@ -851,7 +851,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!135 &1562419970010492191
+--- !u!135 &1944571561962759010
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -918,6 +918,7 @@ MonoBehaviour:
   GameManager: {fileID: 0}
   Sword: {fileID: 0}
   target: {fileID: 0}
+  Player: {fileID: 0}
   healthBar: {fileID: 5251914566673216642}
   goals: []
   counter: 0
@@ -930,7 +931,8 @@ MonoBehaviour:
   timeToDeath: 1.5
   attackCoolDown: 2
   timer: 0
-  dist: 0
+  curDist: 0
+  minAttackDist: 0
   slimePrice: 0
   isPlayerInAttackZone: 0
   isDead: 0
