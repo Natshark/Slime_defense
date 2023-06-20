@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public GameObject lastPressedPlatform;
+    public GameObject createdTower;
+    public GameObject destroyedTower;
+
     public Canvas CanvasOfTowerUI;
 
     public GameObject PauseUI;
@@ -39,7 +42,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
 
-        PlayerMoney = 0;
+        PlayerMoney = 999;
         isPaused = false;
         isSettings = false;
     }
@@ -54,7 +57,7 @@ public class GameManager : MonoBehaviour
             GameLose();
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape)) 
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
 
 
@@ -64,7 +67,7 @@ public class GameManager : MonoBehaviour
                 isSettings = false;
                 resume();
             }
-            else 
+            else
             {
                 Cursor.lockState = CursorLockMode.None;
                 pause();
@@ -74,15 +77,17 @@ public class GameManager : MonoBehaviour
 
     public void createMagicTower()
     {
-        if (!hasTower && PlayerMoney >= magicTowerPrice) 
+        if (!hasTower && PlayerMoney >= magicTowerPrice)
         {
             PlayerMoney -= magicTowerPrice;
 
-            Instantiate(magicTower, lastPressedPlatform.transform.position, Quaternion.identity);
+            createdTower = Instantiate(magicTower, lastPressedPlatform.transform.position, Quaternion.identity);
+            createdTower.transform.parent = lastPressedPlatform.transform;
             lastPressedPlatform.GetComponent<PlatformController>().hasTower = true;
             CanvasOfTowerUI.enabled = false;
             CanvasOfTowerUI.gameObject.transform.GetChild(0).GetComponent<Button>().enabled = false;
             CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
+            CanvasOfTowerUI.gameObject.transform.GetChild(2).GetComponent<Button>().enabled = false;
             lastPressedPlatform.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
         }
     }
@@ -93,11 +98,39 @@ public class GameManager : MonoBehaviour
         {
             PlayerMoney -= cannonTowerPrice;
 
-            Instantiate(cannonTower, lastPressedPlatform.transform.position, Quaternion.identity);
+            createdTower = Instantiate(cannonTower, lastPressedPlatform.transform.position, Quaternion.identity);
+            createdTower.transform.parent = lastPressedPlatform.transform;
             lastPressedPlatform.GetComponent<PlatformController>().hasTower = true;
             CanvasOfTowerUI.enabled = false;
             CanvasOfTowerUI.gameObject.transform.GetChild(0).GetComponent<Button>().enabled = false;
             CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
+            CanvasOfTowerUI.gameObject.transform.GetChild(2).GetComponent<Button>().enabled = false;
+            lastPressedPlatform.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
+        }
+    }
+
+    public void destroyTower()
+    {
+        if (hasTower)
+        {
+            destroyedTower = lastPressedPlatform.transform.GetChild(1).gameObject;
+
+            if (destroyedTower.CompareTag("MagicTower"))
+            {
+                PlayerMoney += magicTowerPrice / 4;
+            }
+            else if (destroyedTower.CompareTag("CannonTower"))
+            {
+                PlayerMoney += cannonTowerPrice / 4;
+            }
+
+            Destroy(destroyedTower);
+            lastPressedPlatform.GetComponent<PlatformController>().hasTower = false;
+            hasTower = false;
+            CanvasOfTowerUI.enabled = false;
+            CanvasOfTowerUI.gameObject.transform.GetChild(0).GetComponent<Button>().enabled = false;
+            CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
+            CanvasOfTowerUI.gameObject.transform.GetChild(2).GetComponent<Button>().enabled = false;
             lastPressedPlatform.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
         }
     }
@@ -136,7 +169,7 @@ public class GameManager : MonoBehaviour
         CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = true;
     }
 
-    public void menu() 
+    public void menu()
     {
         SceneManager.LoadScene(0);
     }
