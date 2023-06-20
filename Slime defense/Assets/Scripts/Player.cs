@@ -22,7 +22,6 @@ public class Player : MonoBehaviour
     public float nextHpRegenTime = 0.0f;
     public float maxHpPlayer = 100.0f;
 
-    string temp = "a", a;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -31,12 +30,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        a = animator.GetCurrentAnimatorStateInfo(0).fullPathHash.ToString();
-        if (temp != a)
-        {
-            Debug.Log(a);
-            temp = a;
-        }
         playerHpText.text = hp.ToString();
 
         if (!isDead)
