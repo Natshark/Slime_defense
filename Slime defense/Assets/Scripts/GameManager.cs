@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject magicTower;
     public GameObject cannonTower;
+    public GameObject teslaTower;
     public GameObject SettingsMenu;
 
     public bool hasTower;
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     public int magicTowerPrice = 50;
     public int cannonTowerPrice = 30;
+    public int teslaTowerPrice = 80;
 
     public float userSensitivity;
     public float gameVolume;
@@ -88,10 +90,28 @@ public class GameManager : MonoBehaviour
             CanvasOfTowerUI.gameObject.transform.GetChild(0).GetComponent<Button>().enabled = false;
             CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
             CanvasOfTowerUI.gameObject.transform.GetChild(2).GetComponent<Button>().enabled = false;
+            CanvasOfTowerUI.gameObject.transform.GetChild(3).GetComponent<Button>().enabled = false;
             lastPressedPlatform.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
         }
     }
 
+    public void createTeslaTower()
+    {
+        if (!hasTower && PlayerMoney >= teslaTowerPrice)
+        {
+            PlayerMoney -= teslaTowerPrice;
+
+            createdTower = Instantiate(teslaTower, lastPressedPlatform.transform.position, Quaternion.identity);
+            createdTower.transform.parent = lastPressedPlatform.transform;
+            lastPressedPlatform.GetComponent<PlatformController>().hasTower = true;
+            CanvasOfTowerUI.enabled = false;
+            CanvasOfTowerUI.gameObject.transform.GetChild(0).GetComponent<Button>().enabled = false;
+            CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
+            CanvasOfTowerUI.gameObject.transform.GetChild(2).GetComponent<Button>().enabled = false;
+            CanvasOfTowerUI.gameObject.transform.GetChild(3).GetComponent<Button>().enabled = false;
+            lastPressedPlatform.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
+        }
+    }
     public void createCannonTower()
     {
         if (!hasTower && PlayerMoney >= cannonTowerPrice)
@@ -105,6 +125,7 @@ public class GameManager : MonoBehaviour
             CanvasOfTowerUI.gameObject.transform.GetChild(0).GetComponent<Button>().enabled = false;
             CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
             CanvasOfTowerUI.gameObject.transform.GetChild(2).GetComponent<Button>().enabled = false;
+            CanvasOfTowerUI.gameObject.transform.GetChild(3).GetComponent<Button>().enabled = false;
             lastPressedPlatform.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
         }
     }
@@ -122,6 +143,10 @@ public class GameManager : MonoBehaviour
             else if (destroyedTower.CompareTag("CannonTower"))
             {
                 PlayerMoney += cannonTowerPrice / 4;
+            } 
+            else if (destroyedTower.CompareTag("TeslaTower")) 
+            {
+                PlayerMoney += teslaTowerPrice / 4;
             }
 
             Destroy(destroyedTower);
@@ -131,6 +156,7 @@ public class GameManager : MonoBehaviour
             CanvasOfTowerUI.gameObject.transform.GetChild(0).GetComponent<Button>().enabled = false;
             CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
             CanvasOfTowerUI.gameObject.transform.GetChild(2).GetComponent<Button>().enabled = false;
+            CanvasOfTowerUI.gameObject.transform.GetChild(3).GetComponent<Button>().enabled = false;
             lastPressedPlatform.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
         }
     }
@@ -146,6 +172,8 @@ public class GameManager : MonoBehaviour
 
         CanvasOfTowerUI.gameObject.transform.GetChild(0).GetComponent<Button>().enabled = false;
         CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
+        CanvasOfTowerUI.gameObject.transform.GetChild(2).GetComponent<Button>().enabled = false;
+        CanvasOfTowerUI.gameObject.transform.GetChild(3).GetComponent<Button>().enabled = false;
     }
 
     public void resume()
@@ -167,6 +195,8 @@ public class GameManager : MonoBehaviour
 
         CanvasOfTowerUI.gameObject.transform.GetChild(0).GetComponent<Button>().enabled = true;
         CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = true;
+        CanvasOfTowerUI.gameObject.transform.GetChild(2).GetComponent<Button>().enabled = true;
+        CanvasOfTowerUI.gameObject.transform.GetChild(3).GetComponent<Button>().enabled = true;
     }
 
     public void menu()
@@ -228,6 +258,8 @@ public class GameManager : MonoBehaviour
 
         CanvasOfTowerUI.gameObject.transform.GetChild(0).GetComponent<Button>().enabled = false;
         CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
+        CanvasOfTowerUI.gameObject.transform.GetChild(2).GetComponent<Button>().enabled = false;
+        CanvasOfTowerUI.gameObject.transform.GetChild(3).GetComponent<Button>().enabled = false;
 
         LoseGameUI.SetActive(true);
     }
