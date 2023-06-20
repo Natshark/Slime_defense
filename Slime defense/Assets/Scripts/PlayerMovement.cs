@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 35;
     public Rigidbody rb;
     public Animator animator;
+    public string currentAnimatorState;
 
     public bool isMoving = false;
     void Start()
@@ -20,17 +21,18 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!GetComponent<Player>().isDead)
         {
+            currentAnimatorState = animator.GetCurrentAnimatorStateInfo(0).fullPathHash.ToString();
             GetInput();
 
             if (isMoving)
             {
                 animator.Play("MoveFWD_Battle_InPlace_SwordAndShield");
             }
-            else if (animator.GetCurrentAnimatorStateInfo(0).fullPathHash.ToString() != "1011701323")
+            else if (currentAnimatorState != "1011701323" && currentAnimatorState != "-86853306" && currentAnimatorState != "-1550725538")
             {
-                /*animator.speed = 0;
+                animator.speed = 0;
                 animator.Play("Idle_Battle_SwordAndShield");
-                animator.speed = 1;*/
+                animator.speed = 1;
             }
         }
     }

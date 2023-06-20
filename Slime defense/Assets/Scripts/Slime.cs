@@ -37,7 +37,10 @@ public class Slime : MonoBehaviour
 
     public bool isPlayerInAttackZone = false;
     public bool isDead = false;
-
+ 
+    Ray ray;
+    RaycastHit hit;
+    public GameObject hittedObject;
 
     void Start()
     {
@@ -65,7 +68,7 @@ public class Slime : MonoBehaviour
             damage = 50;
             damageToHome = 20;
             slimePrice = 20;
-            minAttackDist = 2.5f;
+            minAttackDist = 3.5f;
         }
     }
 
@@ -77,26 +80,9 @@ public class Slime : MonoBehaviour
         {
             if (hp <= 0)
             {
-                animator.speed = 0;
-                animator.Play("Die");
-                animator.speed = 1;
-
-
-                isDead = true;
-                healthBar.gameObject.SetActive(false);
-
-                if (target != null)
-                {
-                    Player.GetComponent<Player>().triggerredSlime = null;
-                }
-                target = null;
-
-                GameManager.PlayerMoney += slimePrice;
-
-                navMeshAgent.destination = transform.position;
-                navMeshAgent.speed = 0;
+                Death();
             }
-            else if (counter != 7)
+            else if (counter != 7) // если слайм не дошёл до конца пути
             {
                 navMeshAgent.speed = 3.5f;
 
@@ -126,16 +112,34 @@ public class Slime : MonoBehaviour
                     {
                         navMeshAgent.destination = Player.transform.position;
                     }
-                    else if (timer <= 0)
+                    else
                     {
                         navMeshAgent.speed = 0f;
                         transform.LookAt(target.transform);
 
-                        animator.speed = 0;
-                        animator.Play("Attack01");
-                        animator.speed = 1;
+                        if (timer <= 0)
+                        {
+                            ray = new Ray(transform.position + transform.up, transform.forward);
+                            if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << 6 | 1 << 12))
+                            {
+                                hittedObject = hit.collider.gameObject;
 
-                        //timer = attackCoolDown;
+                                Debug.Log(hittedObject);
+                                if (hittedObject.CompareTag("Player"))
+                                {
+                                    if (hittedObject.GetComponent<Player>().hp > 0)
+                                    {
+                                        hittedObject.GetComponent<Player>().hp -= damage;
+                                    }
+                                }
+                            }
+
+                            animator.speed = 0;
+                            animator.Play("Attack01");
+                            animator.speed = 1;
+
+                            timer = attackCoolDown;
+                        }
                     }
                 }
 
@@ -204,10 +208,12 @@ public class Slime : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    /*private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player" && timer < 0)
         {
+            //Time.timeScale = 0;
+            Debug.Log(Vector3.Distance(transform.position, Player.transform.position));
             if (Player.GetComponent<Player>().triggerredSlime != gameObject)
             {
                 animator.speed = 0;
@@ -234,5 +240,27 @@ public class Slime : MonoBehaviour
             collision.gameObject.GetComponent<Player>().hp -= damage;
             timer = attackCoolDown;
         }
+    }*/
+
+    void Death()
+    {
+        animator.speed = 0;
+        animator.Play("Die");
+        animator.speed = 1;
+
+
+        isDead = true;
+        healthBar.gameObject.SetActive(false);
+
+        if (target != null)
+        {
+            Player.GetComponent<Player>().triggerredSlime = null;
+        }
+        target = null;
+
+        GameManager.PlayerMoney += slimePrice;
+
+        navMeshAgent.destination = transform.position;
+        navMeshAgent.speed = 0;
     }
 }
