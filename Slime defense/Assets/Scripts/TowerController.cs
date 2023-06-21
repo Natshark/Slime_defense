@@ -17,10 +17,10 @@ public class TowerController : MonoBehaviour
 
     public float attackCoolDown;
     public float timer = 0;
+    public int level = 1;
 
     public float minDistance;
     public float curDistance;
-
 
     public List<GameObject> targets = new List<GameObject> { };
     public List<GameObject> realTargets = new List<GameObject> { };
@@ -31,9 +31,13 @@ public class TowerController : MonoBehaviour
         {
             attackCoolDown = 0.75f;
         }
-        else
+        else if (CompareTag("MagicTower"))
         {
             attackCoolDown = 1;
+        }
+        else
+        {
+            attackCoolDown = 1.5f;
         }
     }
 
@@ -59,11 +63,20 @@ public class TowerController : MonoBehaviour
                 {
                     timer = attackCoolDown;
                     createdMissile = Instantiate(missile, placeForMissile.position, Quaternion.identity);
-                    createdMissile.GetComponent<Missile>().target = target;
+                    if (!createdMissile.CompareTag("Lightning"))
+                    {
+                        createdMissile.GetComponent<Missile>().target = target;
+                    }
+                    else
+                    {
+                        createdMissile.GetComponent<Lightning>().target = target;
+                        createdMissile.GetComponent<Lightning>().parent = gameObject;
+                    }
                 }
             }
         }
 
+        target = null;
         realTargets.Clear();
         foreach (GameObject slime in targets)
         {

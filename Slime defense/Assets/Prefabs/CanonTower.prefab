@@ -166,7 +166,7 @@ MonoBehaviour:
   createdMissile: {fileID: 0}
   placeForMissile: {fileID: 2667945300218126271}
   hasTarget: 0
-  attackCoolDown: 1
+  attackCoolDown: 0.75
   timer: 0
   minDistance: Infinity
   curDistance: 0

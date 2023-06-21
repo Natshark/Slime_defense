@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public GameObject lastPressedPlatform;
     public GameObject createdTower;
     public GameObject destroyedTower;
+    public GameObject Tower;
 
     public Canvas CanvasOfTowerUI;
 
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour
     public int magicTowerPrice = 50;
     public int cannonTowerPrice = 30;
     public int teslaTowerPrice = 80;
+    public int upgradePrice = 100;
 
     public float userSensitivity;
     public float gameVolume;
@@ -39,6 +41,11 @@ public class GameManager : MonoBehaviour
 
     public Slider SensitivitySlider;
     public Slider VolumeSlider;
+
+    public GameObject[] CannonTowers;
+    public GameObject[] MagicTowers;
+    public GameObject[] TeslaTowers;
+    public GameObject[] UpgradingTowers;
 
     void Start()
     {
@@ -61,8 +68,6 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-
-
             if (isPaused)
             {
                 SettingsMenu.SetActive(false);
@@ -130,6 +135,33 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void upgradeTower()
+    {
+        if (hasTower && PlayerMoney >= upgradePrice)
+        {
+            Tower = lastPressedPlatform.transform.GetChild(1).gameObject;
+            if (Tower.GetComponent<TowerController>().level != 3)
+            {
+                if (Tower.CompareTag("TeslaTower"))
+                {
+                    UpgradingTowers = TeslaTowers;
+                }
+
+                createdTower = Instantiate(UpgradingTowers[Tower.GetComponent<TowerController>().level], Tower.transform.position, Quaternion.identity);
+                createdTower.transform.parent = lastPressedPlatform.transform;
+                Destroy(Tower);
+                PlayerMoney -= upgradePrice;
+
+                CanvasOfTowerUI.enabled = false;
+                CanvasOfTowerUI.gameObject.transform.GetChild(0).GetComponent<Button>().enabled = false;
+                CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
+                CanvasOfTowerUI.gameObject.transform.GetChild(2).GetComponent<Button>().enabled = false;
+                CanvasOfTowerUI.gameObject.transform.GetChild(3).GetComponent<Button>().enabled = false;
+                lastPressedPlatform.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
+            }
+        }
+    }
+
     public void destroyTower()
     {
         if (hasTower)
@@ -166,6 +198,7 @@ public class GameManager : MonoBehaviour
         PauseUI.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
+        Camera.main.GetComponent<AudioListener>().enabled = false;
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -181,6 +214,7 @@ public class GameManager : MonoBehaviour
         PauseUI.SetActive(false);
         Time.timeScale = 1.0f;
         isPaused = false;
+        Camera.main.GetComponent<AudioListener>().enabled = true;
 
         if (Camera.main.transform.parent != null)
         {
@@ -252,6 +286,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0.0f;
         isPaused = true;
+        Camera.main.GetComponent<AudioListener>().enabled = false;
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
