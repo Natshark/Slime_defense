@@ -1349,7 +1349,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 125.7, y: 12.1}
+  m_AnchoredPosition: {x: 119.7, y: 21.6}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &145349737
@@ -1365,7 +1365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1374,16 +1374,16 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: da05befe423fc4fd787bd16a716f59d9, type: 3}
-    m_FontSize: 0
-    m_FontStyle: 1
+    m_FontSize: 30
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 48
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 100
 --- !u!222 &145349738
@@ -3112,7 +3112,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 125.7, y: 12.1}
+  m_AnchoredPosition: {x: 118.6, y: 23.9}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &272917022
@@ -3128,7 +3128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3137,16 +3137,16 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: da05befe423fc4fd787bd16a716f59d9, type: 3}
-    m_FontSize: 0
-    m_FontStyle: 1
+    m_FontSize: 30
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 48
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 50
 --- !u!222 &272917023
@@ -7885,7 +7885,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2855066696202307890, guid: 3d293529968344b2d955e4027b31241b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 2.797472
+      value: 31.3
       objectReference: {fileID: 0}
     - target: {fileID: 3025364269248606389, guid: 3d293529968344b2d955e4027b31241b, type: 3}
       propertyPath: m_Pivot.x
@@ -7976,6 +7976,18 @@ PrefabInstance:
       value: 'Cannon
 
         Tower'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150307433283626710, guid: 3d293529968344b2d955e4027b31241b, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150307433283626710, guid: 3d293529968344b2d955e4027b31241b, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150307433283626710, guid: 3d293529968344b2d955e4027b31241b, type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5150307433283626710, guid: 3d293529968344b2d955e4027b31241b, type: 3}
       propertyPath: m_FontData.m_MinSize
@@ -12481,7 +12493,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 125.7, y: 12.1}
+  m_AnchoredPosition: {x: 122, y: 20.7}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &912898349
@@ -12497,7 +12509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -12506,16 +12518,16 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: da05befe423fc4fd787bd16a716f59d9, type: 3}
-    m_FontSize: 0
-    m_FontStyle: 1
+    m_FontSize: 30
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 48
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 25%
 --- !u!222 &912898350
@@ -14153,7 +14165,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 125.7, y: 12.1}
+  m_AnchoredPosition: {x: 119.1, y: 21.5}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1035342964
@@ -14169,7 +14181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -14178,16 +14190,16 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: da05befe423fc4fd787bd16a716f59d9, type: 3}
-    m_FontSize: 0
-    m_FontStyle: 1
+    m_FontSize: 30
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 48
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 80
 --- !u!222 &1035342965
@@ -15776,6 +15788,7 @@ MonoBehaviour:
   magicTowerPrice: 50
   cannonTowerPrice: 30
   teslaTowerPrice: 80
+  upgradePrice: 100
   userSensitivity: 0
   gameVolume: 0
   CameraRotation: {fileID: 0}
@@ -15811,7 +15824,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2855066696202307890, guid: 3d293529968344b2d955e4027b31241b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 2.797472
+      value: 25.3
       objectReference: {fileID: 0}
     - target: {fileID: 3025364269248606389, guid: 3d293529968344b2d955e4027b31241b, type: 3}
       propertyPath: m_Pivot.x
@@ -15906,6 +15919,18 @@ PrefabInstance:
       value: 'Destroy
 
         Tower'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150307433283626710, guid: 3d293529968344b2d955e4027b31241b, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150307433283626710, guid: 3d293529968344b2d955e4027b31241b, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150307433283626710, guid: 3d293529968344b2d955e4027b31241b, type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5150307433283626710, guid: 3d293529968344b2d955e4027b31241b, type: 3}
       propertyPath: m_FontData.m_MinSize
@@ -19795,7 +19820,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2855066696202307890, guid: 3d293529968344b2d955e4027b31241b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 2.797472
+      value: 41.9
       objectReference: {fileID: 0}
     - target: {fileID: 3025364269248606389, guid: 3d293529968344b2d955e4027b31241b, type: 3}
       propertyPath: m_Pivot.x
@@ -19886,6 +19911,18 @@ PrefabInstance:
       value: 'Tesla
 
         Tower'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150307433283626710, guid: 3d293529968344b2d955e4027b31241b, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150307433283626710, guid: 3d293529968344b2d955e4027b31241b, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150307433283626710, guid: 3d293529968344b2d955e4027b31241b, type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5150307433283626710, guid: 3d293529968344b2d955e4027b31241b, type: 3}
       propertyPath: m_FontData.m_MinSize
@@ -19983,7 +20020,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 125.7, y: 12.1}
+  m_AnchoredPosition: {x: 117.5, y: 24.4}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1496973231
@@ -19999,7 +20036,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -20008,16 +20045,16 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: da05befe423fc4fd787bd16a716f59d9, type: 3}
-    m_FontSize: 0
-    m_FontStyle: 1
+    m_FontSize: 34
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 48
+    m_MaxSize: 300
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 30
 --- !u!222 &1496973232
@@ -21434,7 +21471,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2855066696202307890, guid: 3d293529968344b2d955e4027b31241b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 2.797472
+      value: 46.3
       objectReference: {fileID: 0}
     - target: {fileID: 3025364269248606389, guid: 3d293529968344b2d955e4027b31241b, type: 3}
       propertyPath: m_Pivot.x
@@ -21525,6 +21562,18 @@ PrefabInstance:
       value: 'Magic
 
         Tower'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150307433283626710, guid: 3d293529968344b2d955e4027b31241b, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150307433283626710, guid: 3d293529968344b2d955e4027b31241b, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150307433283626710, guid: 3d293529968344b2d955e4027b31241b, type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5150307433283626710, guid: 3d293529968344b2d955e4027b31241b, type: 3}
       propertyPath: m_FontData.m_MinSize
@@ -24378,7 +24427,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2855066696202307890, guid: 3d293529968344b2d955e4027b31241b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 2.797472
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 3025364269248606389, guid: 3d293529968344b2d955e4027b31241b, type: 3}
       propertyPath: m_Pivot.x
@@ -24473,6 +24522,18 @@ PrefabInstance:
       value: 'Upgrade
 
         Tower'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150307433283626710, guid: 3d293529968344b2d955e4027b31241b, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150307433283626710, guid: 3d293529968344b2d955e4027b31241b, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150307433283626710, guid: 3d293529968344b2d955e4027b31241b, type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5150307433283626710, guid: 3d293529968344b2d955e4027b31241b, type: 3}
       propertyPath: m_FontData.m_MinSize
