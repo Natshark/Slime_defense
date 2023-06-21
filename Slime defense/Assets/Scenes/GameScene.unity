@@ -9733,7 +9733,7 @@ Canvas:
   m_GameObject: {fileID: 710115316}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 963194227}
   m_PlaneDistance: 1
   m_PixelPerfect: 0
@@ -14101,6 +14101,9 @@ MonoBehaviour:
   deathCoolDown: 10
   timer: 0
   playerHpText: {fileID: 1340943724}
+  hpPerSecond: 1
+  nextHpRegenTime: 0
+  maxHpPlayer: 100
 --- !u!224 &1071936858 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9157779979541161936, guid: cfe2281e6fd8b4379b5d4cb25004d25a, type: 3}
