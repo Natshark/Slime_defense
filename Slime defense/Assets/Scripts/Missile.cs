@@ -6,22 +6,25 @@ using UnityEngine;
 public class Missile : MonoBehaviour
 {
     public GameObject target = null;
+    public GameObject parent;
     public Vector3 targetPosition;
 
     public float damage;
     public float speed;
     public string typeOfDamage;
+    public int level;
     void Start()
     {
+        level = parent.GetComponent<TowerController>().level;
         if (CompareTag("Bullet"))
         {
-            damage = 5f;
+            damage = 2.5f + 2.5f * level;
             speed = 0.25f;
             typeOfDamage = "physic";
         }
         else
         {
-            damage = 10f;
+            damage = 5 + 5 * level;
             speed = 0.5f;
             typeOfDamage = "magic";
         }

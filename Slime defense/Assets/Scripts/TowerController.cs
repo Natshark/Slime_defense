@@ -66,6 +66,7 @@ public class TowerController : MonoBehaviour
                     if (!createdMissile.CompareTag("Lightning"))
                     {
                         createdMissile.GetComponent<Missile>().target = target;
+                        createdMissile.GetComponent<Missile>().parent = gameObject;
                     }
                     else
                     {

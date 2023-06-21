@@ -11,9 +11,9 @@ public class Lightning : MonoBehaviour
     public GameObject parent;
     public GameObject createdLightning;
 
-    public int num;
-    public int level;
-    public int damage;
+    public float num;
+    public float level;
+    public float damage;
     public string typeOfDamage = "magic";
 
     public float minDistance;
@@ -60,12 +60,15 @@ public class Lightning : MonoBehaviour
             }
         }
 
-        damage = level * (num + 1);
-        target.GetComponent<Slime>().GetDamage(damage, typeOfDamage);
-        target.GetComponent<Slime>().isStunned = true;
-        Invoke("stunOut", 0.25f + 0.25f * level);
+        if (start && target)
+        {
+            damage = level * 3 * ((num + 1) / (level + 1));
+            target.GetComponent<Slime>().GetDamage(damage, typeOfDamage);
+            target.GetComponent<Slime>().isStunned = true;
+            Invoke("stunOut", 0.25f + 0.25f * level);
 
-        shockedSlimes.Add(target);
+            shockedSlimes.Add(target);
+        }
 
         if (num > 0)
         {

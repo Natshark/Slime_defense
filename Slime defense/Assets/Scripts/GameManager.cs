@@ -51,9 +51,18 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
 
-        PlayerMoney = 999;
+        PlayerMoney = 1000;
         isPaused = false;
         isSettings = false;
+
+        if (PlayerPrefs.HasKey("UserSens"))
+        {
+            Camera.main.GetComponent<CameraRotation>().sensetivityMouse = PlayerPrefs.GetFloat("UserSens");
+        }
+        if (PlayerPrefs.HasKey("GameVolume"))
+        {
+            AudioListener.volume = PlayerPrefs.GetFloat("GameVolume");
+        }
     }
 
     void Update()
@@ -142,7 +151,15 @@ public class GameManager : MonoBehaviour
             Tower = lastPressedPlatform.transform.GetChild(1).gameObject;
             if (Tower.GetComponent<TowerController>().level != 3)
             {
-                if (Tower.CompareTag("TeslaTower"))
+                if (Tower.CompareTag("CannonTower"))
+                {
+                    UpgradingTowers = CannonTowers;
+                }
+                else if (Tower.CompareTag("MagicTower"))
+                {
+                    UpgradingTowers = MagicTowers;
+                }
+                else
                 {
                     UpgradingTowers = TeslaTowers;
                 }

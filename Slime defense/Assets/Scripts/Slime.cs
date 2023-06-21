@@ -132,7 +132,6 @@ public class Slime : MonoBehaviour
                             {
                                 hittedObject = hit.collider.gameObject;
 
-                                Debug.Log(hittedObject);
                                 if (hittedObject.CompareTag("Player"))
                                 {
                                     if (hittedObject.GetComponent<Player>().hp > 0)

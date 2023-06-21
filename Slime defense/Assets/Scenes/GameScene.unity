@@ -7513,7 +7513,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &550116546
 AudioSource:
   m_ObjectHideFlags: 0
@@ -15776,14 +15776,21 @@ MonoBehaviour:
   magicTowerPrice: 50
   cannonTowerPrice: 30
   teslaTowerPrice: 80
+  upgradePrice: 100
   userSensitivity: 0
   gameVolume: 0
   CameraRotation: {fileID: 0}
   AudioManager: {fileID: 0}
   SensitivitySlider: {fileID: 1860306859}
   VolumeSlider: {fileID: 1279114322}
-  CannonTowers: []
-  MagicTowers: []
+  CannonTowers:
+  - {fileID: 2667945298861514643, guid: c447a43d42440484eaf2c72cb74548c7, type: 3}
+  - {fileID: 569052265255405344, guid: 65d334f874110b54386cce9e814bc21c, type: 3}
+  - {fileID: 6093125300353569500, guid: 30add72ca54edbf4e83e1e88c537b0fb, type: 3}
+  MagicTowers:
+  - {fileID: 1923035807110240913, guid: edbad3603ff517648a61266ab7c4bc6c, type: 3}
+  - {fileID: 5484129179461319233, guid: 3f572b2b0d2991e4eb3d9737f2744d64, type: 3}
+  - {fileID: 6294304593396156820, guid: d7f05d7013e39014085082fdfa37c5f1, type: 3}
   TeslaTowers:
   - {fileID: 2218983011116059384, guid: 59429be31ed61ba4ca7d5e4ae9d19cc8, type: 3}
   - {fileID: 277853788652281258, guid: c56d1cdc625129240b87c6dcacb02133, type: 3}
@@ -25342,9 +25349,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1477026454}
   m_Direction: 0
   m_MinValue: 1
-  m_MaxValue: 10
+  m_MaxValue: 1000
   m_WholeNumbers: 1
-  m_Value: 1
+  m_Value: 200
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
