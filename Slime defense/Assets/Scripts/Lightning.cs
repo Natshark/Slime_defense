@@ -33,6 +33,7 @@ public class Lightning : MonoBehaviour
         }
         else
         {
+            target = null;
             start = parent.GetComponent<Lightning>().lightningEnd.gameObject;
             num = parent.GetComponent<Lightning>().num;
 
@@ -45,6 +46,15 @@ public class Lightning : MonoBehaviour
 
             slimes = GameObject.FindGameObjectsWithTag("GreenSlime");
             findClosestSlime();
+
+            slimes = GameObject.FindGameObjectsWithTag("RedSlimeBoss");
+            findClosestSlime();
+
+            slimes = GameObject.FindGameObjectsWithTag("BlueSlimeBoss");
+            findClosestSlime();
+
+            slimes = GameObject.FindGameObjectsWithTag("GreenSlimeBoss");
+            findClosestSlime();
         }
 
         if (start && target)
@@ -55,12 +65,12 @@ public class Lightning : MonoBehaviour
             Invoke("stunOut", 0.25f + 0.25f * level);
 
             shockedSlimes.Add(target);
-        }
 
-        if (num > 0)
-        {
-            Invoke("continueLightning", 0.3f - 0.05f * level);
-            num -= 1;
+            if (num > 0)
+            {
+                Invoke("continueLightning", 0.3f - 0.05f * level);
+                num -= 1;
+            }
         }
 
         Invoke("Destroy", 0.25f + 0.25f * level);
@@ -72,6 +82,11 @@ public class Lightning : MonoBehaviour
         {
             lightningStart.transform.position = start.transform.position;
             lightningEnd.transform.position = target.transform.position;
+        }
+        else
+        {
+            stunOut();
+            Destroy(gameObject);
         }
     }
 
