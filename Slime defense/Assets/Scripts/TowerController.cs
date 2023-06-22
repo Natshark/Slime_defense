@@ -31,7 +31,7 @@ public class TowerController : MonoBehaviour
     {
         if (CompareTag("CannonTower"))
         {
-            attackCoolDown = 1f;
+            attackCoolDown = 0.75f;
             machineGunChance = 0.1f * (level - 1);
         }
         else if (CompareTag("MagicTower"))
@@ -40,10 +40,8 @@ public class TowerController : MonoBehaviour
         }
         else
         {
-            attackCoolDown = 2f;
+            attackCoolDown = 1.5f;
         }
-
-        timer = attackCoolDown;
     }
 
     void Update()

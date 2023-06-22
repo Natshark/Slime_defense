@@ -55,9 +55,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1.0f;
-        Camera.main.GetComponent<AudioListener>().enabled = true;
 
-        PlayerMoney = 100;
+        PlayerMoney = 1000;
         isPaused = false;
         isHeroMenu = false;
         isSettings = false;
@@ -215,15 +214,15 @@ public class GameManager : MonoBehaviour
 
             if (destroyedTower.CompareTag("MagicTower"))
             {
-                PlayerMoney += magicTowerPrice * lastPressedPlatform.transform.GetChild(1).GetComponent<TowerController>().level / 4;
+                PlayerMoney += magicTowerPrice / 4;
             }
             else if (destroyedTower.CompareTag("CannonTower"))
             {
-                PlayerMoney += cannonTowerPrice * lastPressedPlatform.transform.GetChild(1).GetComponent<TowerController>().level / 4;
+                PlayerMoney += cannonTowerPrice / 4;
             } 
             else if (destroyedTower.CompareTag("TeslaTower")) 
             {
-                PlayerMoney += teslaTowerPrice * lastPressedPlatform.transform.GetChild(1).GetComponent<TowerController>().level / 4;
+                PlayerMoney += teslaTowerPrice / 4;
             }
 
             Destroy(destroyedTower);
@@ -382,7 +381,7 @@ public class GameManager : MonoBehaviour
 
         Time.timeScale = 0.0f;
         isPaused = true;
-        Camera.main.GetComponent<AudioListener>().enabled = false;  
+        Camera.main.GetComponent<AudioListener>().enabled = false;
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;

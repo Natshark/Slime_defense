@@ -10,10 +10,9 @@ public class Slime : MonoBehaviour
     Animator animator;
     public NavMeshAgent navMeshAgent;
 
-    public Vector3 currentRoadDestination;
+    Vector3 currentRoadDestination;
 
     public GameManager GameManager;
-    public GameManager Spawner;
     public GameObject Sword;
     public GameObject target;
     public GameObject Player;
@@ -21,6 +20,7 @@ public class Slime : MonoBehaviour
     public GameObject Fire;
     public List<Transform> goals;
     public int counter = 0;
+    public int areaMask = 1 << 0;
     bool hasDestination = false;
     public bool isStunned = false;
     public bool isBurning = false;
@@ -37,12 +37,11 @@ public class Slime : MonoBehaviour
     public int score;
 
     public float timeToDeath = 1.5f;
-    public float attackCoolDown;
+    public float attackCoolDown = 2f;
     public float timer = 0;
     public float curDist;
     public float minAttackDist;
     public int slimePrice;
-    public int numOfWave;
 
     public bool isPlayerInAttackZone = false;
     public bool isDead = false;
@@ -53,7 +52,6 @@ public class Slime : MonoBehaviour
 
     void Start()
     {
-        numOfWave = Spawner.GetComponent<Spawner>().numOfWave;
         animator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         Sword = GameObject.FindGameObjectWithTag("Sword");
@@ -68,10 +66,9 @@ public class Slime : MonoBehaviour
             magicResistance = 0;
             damage = 20;
             damageToHome = 10;
-            slimePrice = 5;
-            minAttackDist = 2.5f;
+            slimePrice = 10;
+            minAttackDist = 2f;
             speed = 3.5f;
-            attackCoolDown = 2f;
         }
         else if (CompareTag("BlueSlime"))
         {
@@ -80,11 +77,10 @@ public class Slime : MonoBehaviour
             physicResistance = 0.75f;
             magicResistance = -0.25f;
             damage = 50;
-            damageToHome = 15;
+            damageToHome = 20;
             slimePrice = 20;
             minAttackDist = 3.5f;
             speed = 2.5f;
-            attackCoolDown = 3f;
         }
         else if (CompareTag("GreenSlime"))
         {
@@ -94,55 +90,14 @@ public class Slime : MonoBehaviour
             magicResistance = 0.5f;
             damage = 0;
             damageToHome = 30;
-            slimePrice = 25;
-            minAttackDist = 0;
-            speed = 4.5f;
-            attackCoolDown = 100f;
-        }
-        else if (CompareTag("RedSlimeBoss"))// угол дороги рампу добавить
-        {
-            hp = 500;
-            physicResistance = 0;
-            magicResistance = 0;
-            damage = 75;
-            damageToHome = 50;
             slimePrice = 50;
-            minAttackDist = 3.5f;
-            speed = 1.5f;
-            attackCoolDown = 3f;
-        }
-        else if (CompareTag("BlueSlimeBoss"))
-        {
-            hp = 400;
-            physicResistance = 0.95f;
-            magicResistance = -0.25f;
-            damage = 100;
-            damageToHome = 75;
-            slimePrice = 75;
-            minAttackDist = 4f;
-            speed = 1f;
-            attackCoolDown = 7.25f;
-        }
-        else if (CompareTag("GreenSlimeBoss"))
-        {
-            hp = 300;
-            physicResistance = -0.25f;
-            magicResistance = 0.95f;
-            damage = 0;
-            damageToHome = 90;
-            slimePrice = 100;
             minAttackDist = 0;
-            speed = 2f;
-            attackCoolDown = 100f;
+            speed = 4;
         }
-
-        hp += numOfWave * 5;
-        damage += numOfWave;
     }
 
     void Update()
     {
-        healthBar.maxValue = hp;
         healthBar.value = hp;
 
         if (!isDead)
@@ -171,20 +126,12 @@ public class Slime : MonoBehaviour
                 {
                     if (!hasDestination)
                     {
-                        if (!(CompareTag("GreenSlime") || CompareTag("GreenSlimeBoss")))
-                        {
-                            currentRoadDestination = goals[counter].position;
-                        }
-                        else
-                        {
-                            currentRoadDestination = goals[counter].position + new Vector3(0, 5, 0);
-                        }
-                        
+                        currentRoadDestination = goals[counter].position;
                         hasDestination = true;
                     }
                     else if (Mathf.Abs(transform.position.x - navMeshAgent.destination.x) < 2.5f && Mathf.Abs(transform.position.z - navMeshAgent.destination.z) < 2.5f)
                     {
-                        if (!(CompareTag("GreenSlime") || CompareTag("GreenSlimeBoss")))
+                        if (!CompareTag("GreenSlime"))
                         {
                             navMeshAgent.areaMask = 1 << 0;
                         }
@@ -222,11 +169,7 @@ public class Slime : MonoBehaviour
 
                                 if (hittedObject.CompareTag("Player"))
                                 {
-                                    Invoke("doDamageToPlayer", 0.4f);
-                                }
-                                else
-                                {
-                                    Invoke("doDamageToShield", 0.4f);
+                                    Invoke("doDamage", 0.35f);
                                 }
                             }
 
@@ -333,14 +276,9 @@ public class Slime : MonoBehaviour
         }
     }
 
-    void doDamageToPlayer()
+    void doDamage()
     {
         Player.GetComponent<Player>().GetDamage(damage);
-    }
-
-    void doDamageToShield()
-    {
-        Player.GetComponent<Player>().GetDamage(Mathf.Floor(damage / 5));
     }
 
     void Death()
@@ -349,7 +287,7 @@ public class Slime : MonoBehaviour
         animator.Play("Die");
         animator.speed = 1;
 
-        if (CompareTag("GreenSlime") || CompareTag("GreenSlimeBoss"))
+        if (CompareTag("GreenSlime"))
         {
             GetComponent<Rigidbody>().useGravity = true;
             navMeshAgent.enabled = false;
