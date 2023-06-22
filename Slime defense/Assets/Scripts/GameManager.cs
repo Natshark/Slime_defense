@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public Canvas CanvasOfTowerUI;
 
     public GameObject PauseUI;
+    public GameObject HeroMenuUI;
     public GameObject LoseGameUI;
 
     public GameObject magicTower;
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
 
     public bool hasTower;
     public bool isPaused;
+    public bool isHeroMenu;
     public bool isSettings;
 
     public int PlayerMoney;
@@ -56,6 +58,7 @@ public class GameManager : MonoBehaviour
 
         PlayerMoney = 1000;
         isPaused = false;
+        isHeroMenu = false;
         isSettings = false;
 
         if (PlayerPrefs.HasKey("UserSens"))
@@ -74,12 +77,13 @@ public class GameManager : MonoBehaviour
         homeHpText.text = homeHp.ToString();
         PlayerScoreText.text = PlayerScore.ToString();
 
+
         if (homeHp <= 0)
         {
             GameLose();
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !isHeroMenu)
         {
             if (isPaused)
             {
@@ -91,6 +95,21 @@ public class GameManager : MonoBehaviour
             {
                 Cursor.lockState = CursorLockMode.None;
                 pause();
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.H) && !isPaused)
+        {
+            if (isHeroMenu)
+            {
+                HeroMenuUI.SetActive(false);
+                isHeroMenu = false;
+                heroMenuOff();
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.None;
+                heroMenuOn();
             }
         }
     }
@@ -109,6 +128,7 @@ public class GameManager : MonoBehaviour
             CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
             CanvasOfTowerUI.gameObject.transform.GetChild(2).GetComponent<Button>().enabled = false;
             CanvasOfTowerUI.gameObject.transform.GetChild(3).GetComponent<Button>().enabled = false;
+            CanvasOfTowerUI.gameObject.transform.GetChild(4).GetComponent<Button>().enabled = false;
             lastPressedPlatform.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
         }
     }
@@ -127,6 +147,7 @@ public class GameManager : MonoBehaviour
             CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
             CanvasOfTowerUI.gameObject.transform.GetChild(2).GetComponent<Button>().enabled = false;
             CanvasOfTowerUI.gameObject.transform.GetChild(3).GetComponent<Button>().enabled = false;
+            CanvasOfTowerUI.gameObject.transform.GetChild(4).GetComponent<Button>().enabled = false;
             lastPressedPlatform.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
         }
     }
@@ -144,6 +165,7 @@ public class GameManager : MonoBehaviour
             CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
             CanvasOfTowerUI.gameObject.transform.GetChild(2).GetComponent<Button>().enabled = false;
             CanvasOfTowerUI.gameObject.transform.GetChild(3).GetComponent<Button>().enabled = false;
+            CanvasOfTowerUI.gameObject.transform.GetChild(4).GetComponent<Button>().enabled = false;
             lastPressedPlatform.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
         }
     }
@@ -178,6 +200,7 @@ public class GameManager : MonoBehaviour
                 CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
                 CanvasOfTowerUI.gameObject.transform.GetChild(2).GetComponent<Button>().enabled = false;
                 CanvasOfTowerUI.gameObject.transform.GetChild(3).GetComponent<Button>().enabled = false;
+                CanvasOfTowerUI.gameObject.transform.GetChild(4).GetComponent<Button>().enabled = false;
                 lastPressedPlatform.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
             }
         }
@@ -210,6 +233,7 @@ public class GameManager : MonoBehaviour
             CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
             CanvasOfTowerUI.gameObject.transform.GetChild(2).GetComponent<Button>().enabled = false;
             CanvasOfTowerUI.gameObject.transform.GetChild(3).GetComponent<Button>().enabled = false;
+            CanvasOfTowerUI.gameObject.transform.GetChild(4).GetComponent<Button>().enabled = false;
             lastPressedPlatform.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
         }
     }
@@ -228,6 +252,24 @@ public class GameManager : MonoBehaviour
         CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
         CanvasOfTowerUI.gameObject.transform.GetChild(2).GetComponent<Button>().enabled = false;
         CanvasOfTowerUI.gameObject.transform.GetChild(3).GetComponent<Button>().enabled = false;
+        CanvasOfTowerUI.gameObject.transform.GetChild(4).GetComponent<Button>().enabled = false;
+    }
+
+    public void heroMenuOn()
+    {
+        HeroMenuUI.SetActive(true);
+        Time.timeScale = 0f;
+        Camera.main.GetComponent<AudioListener>().enabled = false;
+        isHeroMenu = true;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        CanvasOfTowerUI.gameObject.transform.GetChild(0).GetComponent<Button>().enabled = false;
+        CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
+        CanvasOfTowerUI.gameObject.transform.GetChild(2).GetComponent<Button>().enabled = false;
+        CanvasOfTowerUI.gameObject.transform.GetChild(3).GetComponent<Button>().enabled = false;
+        CanvasOfTowerUI.gameObject.transform.GetChild(4).GetComponent<Button>().enabled = false;
     }
 
     public void resume()
@@ -252,6 +294,33 @@ public class GameManager : MonoBehaviour
         CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = true;
         CanvasOfTowerUI.gameObject.transform.GetChild(2).GetComponent<Button>().enabled = true;
         CanvasOfTowerUI.gameObject.transform.GetChild(3).GetComponent<Button>().enabled = true;
+        CanvasOfTowerUI.gameObject.transform.GetChild(4).GetComponent<Button>().enabled = true;
+    }
+
+    public void heroMenuOff()
+    {
+        HeroMenuUI.SetActive(false);
+        Time.timeScale = 1.0f;
+        isHeroMenu = false;
+
+        Camera.main.GetComponent<AudioListener>().enabled = true;
+
+        if (Camera.main.transform.parent != null)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
+        CanvasOfTowerUI.gameObject.transform.GetChild(0).GetComponent<Button>().enabled = true;
+        CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = true;
+        CanvasOfTowerUI.gameObject.transform.GetChild(2).GetComponent<Button>().enabled = true;
+        CanvasOfTowerUI.gameObject.transform.GetChild(3).GetComponent<Button>().enabled = true;
+        CanvasOfTowerUI.gameObject.transform.GetChild(4).GetComponent<Button>().enabled = true;
     }
 
     public void menu()
@@ -321,6 +390,7 @@ public class GameManager : MonoBehaviour
         CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
         CanvasOfTowerUI.gameObject.transform.GetChild(2).GetComponent<Button>().enabled = false;
         CanvasOfTowerUI.gameObject.transform.GetChild(3).GetComponent<Button>().enabled = false;
+        CanvasOfTowerUI.gameObject.transform.GetChild(4).GetComponent<Button>().enabled = false;
 
         LoseGameUI.SetActive(true);
     }
