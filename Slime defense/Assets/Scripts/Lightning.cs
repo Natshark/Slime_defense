@@ -38,26 +38,13 @@ public class Lightning : MonoBehaviour
 
             minDistance = Mathf.Infinity;
             slimes = GameObject.FindGameObjectsWithTag("RedSlime");
-            foreach (GameObject slime in slimes)
-            {
-                curDistance = Vector3.Distance(start.transform.position, slime.transform.position);
-                if (curDistance < minDistance && curDistance < maxDistance && !shockedSlimes.Contains(slime))
-                {
-                    target = slime;
-                    minDistance = curDistance;
-                }
-            }
+            findClosestSlime();
 
             slimes = GameObject.FindGameObjectsWithTag("BlueSlime");
-            foreach (GameObject slime in slimes)
-            {
-                curDistance = Vector3.Distance(start.transform.position, slime.transform.position);
-                if (curDistance < minDistance && curDistance < maxDistance && !shockedSlimes.Contains(slime))
-                {
-                    target = slime;
-                    minDistance = curDistance;
-                }
-            }
+            findClosestSlime();
+
+            slimes = GameObject.FindGameObjectsWithTag("GreenSlime");
+            findClosestSlime();
         }
 
         if (start && target)
@@ -105,6 +92,19 @@ public class Lightning : MonoBehaviour
         if (target)
         {
             target.GetComponent<Slime>().isStunned = false;
+        }
+    }
+
+    void findClosestSlime()
+    {
+        foreach (GameObject slime in slimes)
+        {
+            curDistance = Vector3.Distance(start.transform.position, slime.transform.position);
+            if (curDistance < minDistance && curDistance < maxDistance && !shockedSlimes.Contains(slime))
+            {
+                target = slime;
+                minDistance = curDistance;
+            }
         }
     }
 }

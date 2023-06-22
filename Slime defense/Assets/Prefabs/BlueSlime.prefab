@@ -900,7 +900,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 0.75
   m_BaseOffset: 0
-  m_WalkableMask: 7
+  m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
 --- !u!114 &6870570701523274949
 MonoBehaviour:
@@ -920,9 +920,15 @@ MonoBehaviour:
   target: {fileID: 0}
   Player: {fileID: 0}
   healthBar: {fileID: 5251914566673216642}
+  Fire: {fileID: 0}
   goals: []
   counter: 0
   areaMask: 0
+  isStunned: 0
+  isBurning: 0
+  burningCounter: 5
+  burningDamage: 0
+  burningTimer: 1
   hp: 0
   physicResistance: 0
   magicResistance: 0
@@ -936,6 +942,7 @@ MonoBehaviour:
   slimePrice: 0
   isPlayerInAttackZone: 0
   isDead: 0
+  hittedObject: {fileID: 0}
 --- !u!1 &1822049695589022
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,13 +19,12 @@ public class Player : MonoBehaviour
 
     public Text playerHpText;
     public float hpPerSecond = 1.0f;
-    public float nextHpRegenTime = 0.0f;
     public float maxHpPlayer = 100.0f;
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        InvokeRepeating("hpRegeneration", 0.0f, 3F);
+        InvokeRepeating("hpRegeneration", 0, 3);
     }
 
     void Update()
@@ -101,7 +100,14 @@ public class Player : MonoBehaviour
         if (hp < maxHpPlayer)
         {
             hp += hpPerSecond;
-            nextHpRegenTime += 3.0f;
+        }
+    }
+
+    public void GetDamage(float damage)
+    {
+        if (hp > 0)
+        {
+            hp -= damage;
         }
     }
 }

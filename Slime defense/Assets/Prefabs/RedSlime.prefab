@@ -457,7 +457,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 0.75
   m_BaseOffset: 0
-  m_WalkableMask: 7
+  m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
 --- !u!114 &1425713141746658794
 MonoBehaviour:
@@ -477,10 +477,15 @@ MonoBehaviour:
   target: {fileID: 0}
   Player: {fileID: 0}
   healthBar: {fileID: 3102250705500040075}
+  Fire: {fileID: 0}
   goals: []
   counter: 0
   areaMask: 0
   isStunned: 0
+  isBurning: 0
+  burningCounter: 5
+  burningDamage: 0
+  burningTimer: 1
   hp: 20
   physicResistance: 0
   magicResistance: 0

@@ -33,6 +33,7 @@ public class Slime : MonoBehaviour
     public float magicResistance;
     public float damage;
     public float damageToHome;
+    public float speed;
 
     public float timeToDeath = 1.5f;
     public float attackCoolDown = 2f;
@@ -65,8 +66,9 @@ public class Slime : MonoBehaviour
             damageToHome = 10;
             slimePrice = 10;
             minAttackDist = 2f;
+            speed = 3.5f;
         }
-        else
+        else if (CompareTag("BlueSlime"))
         {
             hp = 40;
             physicResistance = 0.75f;
@@ -75,6 +77,18 @@ public class Slime : MonoBehaviour
             damageToHome = 20;
             slimePrice = 20;
             minAttackDist = 3.5f;
+            speed = 2.5f;
+        }
+        else if (CompareTag("GreenSlime"))
+        {
+            hp = 30;
+            physicResistance = -0.25f;
+            magicResistance = 0.5f;
+            damage = 0;
+            damageToHome = 30;
+            slimePrice = 50;
+            minAttackDist = 0;
+            speed = 4;
         }
     }
 
@@ -92,7 +106,7 @@ public class Slime : MonoBehaviour
             {
                 if (!isStunned)
                 {
-                    navMeshAgent.speed = 3.5f;
+                    navMeshAgent.speed = speed;
                 }
                 else
                 {
@@ -113,7 +127,14 @@ public class Slime : MonoBehaviour
                     }
                     else if (Mathf.Abs(transform.position.x - navMeshAgent.destination.x) < 2.5f && Mathf.Abs(transform.position.z - navMeshAgent.destination.z) < 2.5f)
                     {
-                        navMeshAgent.areaMask = 1 << 0;
+                        if (!CompareTag("GreenSlime"))
+                        {
+                            navMeshAgent.areaMask = 1 << 0;
+                        }
+                        else
+                        {
+                            navMeshAgent.areaMask = 1 << 4;
+                        }
                         hasDestination = false;
                         counter++;
                     }
@@ -144,10 +165,7 @@ public class Slime : MonoBehaviour
 
                                 if (hittedObject.CompareTag("Player"))
                                 {
-                                    if (hittedObject.GetComponent<Player>().hp > 0)
-                                    {
-                                        hittedObject.GetComponent<Player>().hp -= damage;
-                                    }
+                                    Invoke("doDamage", 0.35f);
                                 }
                             }
 
@@ -254,13 +272,23 @@ public class Slime : MonoBehaviour
         }
     }
 
+    void doDamage()
+    {
+        Player.GetComponent<Player>().GetDamage(damage);
+    }
+
     void Death()
     {
         animator.speed = 0;
         animator.Play("Die");
         animator.speed = 1;
 
-
+        if (CompareTag("GreenSlime"))
+        {
+            GetComponent<Rigidbody>().useGravity = true;
+            navMeshAgent.enabled = false;
+        }
+        
         isDead = true;
         healthBar.gameObject.SetActive(false);
 
@@ -272,7 +300,6 @@ public class Slime : MonoBehaviour
 
         GameManager.PlayerMoney += slimePrice;
 
-        navMeshAgent.destination = transform.position;
         navMeshAgent.speed = 0;
     }
 }

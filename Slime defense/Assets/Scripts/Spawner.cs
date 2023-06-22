@@ -6,6 +6,7 @@ public class Spawner : MonoBehaviour
 {
     public GameObject redSlime;
     public GameObject blueSlime;
+    public GameObject greenSlime;
     public GameObject chosenSlime;
     public GameObject createdSlime;
 
@@ -17,7 +18,7 @@ public class Spawner : MonoBehaviour
     float timer;
     int counter = 100;
 
-    int rand;
+    float rand;
     void Start()
     {
 
@@ -35,14 +36,18 @@ public class Spawner : MonoBehaviour
                     localGoals.Add(globalGoalsNorth[i * 3 + Random.Range(0, 3)]);
                 }
 
-                rand = Random.Range(1, 5);
-                if (rand < 4)
+                rand = Random.Range(0f, 1f);
+                if (rand < 0.5f)
                 {
                     chosenSlime = redSlime;
                 }
-                else
+                else if (rand < 0.75f)
                 {
                     chosenSlime = blueSlime;
+                }
+                else
+                {
+                    chosenSlime = greenSlime;
                 }
                 createdSlime = Instantiate(chosenSlime, transform.position, Quaternion.Euler(0, -90, 0));
                 createdSlime.GetComponent<Slime>().goals = localGoals;
