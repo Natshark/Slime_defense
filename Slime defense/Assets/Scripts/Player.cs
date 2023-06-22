@@ -49,25 +49,13 @@ public class Player : MonoBehaviour
             {
                 slimes = GameObject.FindGameObjectsWithTag("RedSlime");
                 mindist = Mathf.Infinity;
-                foreach (GameObject slime in slimes)
-                {
-                    curdist = Vector3.Distance(transform.position, slime.transform.position);
-                    if (curdist < mindist)
-                    {
-                        mindist = curdist;
-                        closestSlime = slime;
-                    }
-                }
+                findSlime();
                 slimes = GameObject.FindGameObjectsWithTag("BlueSlime");
-                foreach (GameObject slime in slimes)
-                {
-                    curdist = Vector3.Distance(transform.position, slime.transform.position);
-                    if (curdist < mindist)
-                    {
-                        mindist = curdist;
-                        closestSlime = slime;
-                    }
-                }
+                findSlime();
+                slimes = GameObject.FindGameObjectsWithTag("RedSlimeBoss");
+                findSlime();
+                slimes = GameObject.FindGameObjectsWithTag("BlueSlimeBoss");
+                findSlime();
 
                 if (closestSlime && Vector3.Distance(transform.position, closestSlime.transform.position) <= 7.5f)
                 {
@@ -108,6 +96,23 @@ public class Player : MonoBehaviour
         if (hp > 0)
         {
             hp -= damage;
+            if (hp < 0)
+            {
+                hp = 0;
+            }
+        }
+    }
+
+    void findSlime()
+    {
+        foreach (GameObject slime in slimes)
+        {
+            curdist = Vector3.Distance(transform.position, slime.transform.position);
+            if (curdist < mindist)
+            {
+                mindist = curdist;
+                closestSlime = slime;
+            }
         }
     }
 }
