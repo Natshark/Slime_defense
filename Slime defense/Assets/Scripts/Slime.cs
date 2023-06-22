@@ -17,11 +17,16 @@ public class Slime : MonoBehaviour
     public GameObject target;
     public GameObject Player;
     public Slider healthBar;
+    public GameObject Fire;
     public List<Transform> goals;
     public int counter = 0;
     public int areaMask = 1 << 0;
     bool hasDestination = false;
     public bool isStunned = false;
+    public bool isBurning = false;
+    public int burningCounter = 5;
+    public float burningDamage;
+    public float burningTimer = 1;
 
     public float hp;
     public float physicResistance;
@@ -92,6 +97,11 @@ public class Slime : MonoBehaviour
                 else
                 {
                     navMeshAgent.speed = 0;
+                }
+
+                if (isBurning)
+                {
+                    Burning();
                 }
 
                 if (Player.GetComponent<Player>().triggerredSlime != gameObject)
@@ -187,18 +197,21 @@ public class Slime : MonoBehaviour
 
     public void GetDamage(float damage, string typeOfDamage)
     {
-        if (typeOfDamage == "physic")
+        if (hp > 0)
         {
-            hp -= damage * (1 - physicResistance);
-        }
-        else
-        {
-            hp -= damage * (1 - magicResistance);
-        }
+            if (typeOfDamage == "physic")
+            {
+                hp -= damage * (1 - physicResistance);
+            }
+            else
+            {
+                hp -= damage * (1 - magicResistance);
+            }
 
-        animator.speed = 0;
-        animator.Play("GetHit");
-        animator.speed = 1;
+            animator.speed = 0;
+            animator.Play("GetHit");
+            animator.speed = 1;
+        }
     }
 
     void attackZoneCheck()
@@ -212,6 +225,32 @@ public class Slime : MonoBehaviour
         else
         {
             isPlayerInAttackZone = true;
+        }
+    }
+
+    public void Burning()
+    {
+        if (burningTimer <= 0)
+        {
+            if (burningCounter > 0)
+            {
+                GetDamage(burningDamage, "magic");
+                burningCounter--;
+            }
+            else
+            {
+                isBurning = false;
+                burningCounter = 5;
+                if (Fire)
+                {
+                    Destroy(Fire);
+                }
+            }
+            burningTimer = 1;
+        }
+        else
+        {
+            burningTimer -= Time.deltaTime;
         }
     }
 

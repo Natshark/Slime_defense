@@ -11,7 +11,7 @@ public class Sword : MonoBehaviour
     public string typeOfDamage = "physic";
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 11 && other.gameObject.GetComponent<Slime>().hp > 0 && Player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).fullPathHash.ToString() == "1011701323")
+        if (other.gameObject.layer == 11 && Player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).fullPathHash.ToString() == "1011701323")
         {
             if (LastHittedSlime != other.gameObject)
             {

@@ -377,7 +377,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  parent: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
   damage: 5
   speed: 0.5
   typeOfDamage: 
+  level: 0
+  burningChance: 0
+  Fire: {fileID: 198690, guid: 18faec2a14493684d905501076799765, type: 3}
