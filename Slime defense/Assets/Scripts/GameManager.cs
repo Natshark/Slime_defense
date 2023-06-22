@@ -47,6 +47,9 @@ public class GameManager : MonoBehaviour
     public GameObject[] TeslaTowers;
     public GameObject[] UpgradingTowers;
 
+    public Text PlayerScoreText;
+    public int PlayerScore = 0;
+
     void Start()
     {
         Time.timeScale = 1.0f;
@@ -69,6 +72,7 @@ public class GameManager : MonoBehaviour
     {
         moneyText.text = PlayerMoney.ToString();
         homeHpText.text = homeHp.ToString();
+        PlayerScoreText.text = PlayerScore.ToString();
 
         if (homeHp <= 0)
         {
@@ -301,6 +305,11 @@ public class GameManager : MonoBehaviour
 
     public void GameLose()
     {
+        if ((!PlayerPrefs.HasKey("HighScore")) || (PlayerPrefs.GetInt("HighScore") < PlayerScore)) 
+        {
+            PlayerPrefs.SetInt("HighScore", PlayerScore);
+        } 
+
         Time.timeScale = 0.0f;
         isPaused = true;
         Camera.main.GetComponent<AudioListener>().enabled = false;
