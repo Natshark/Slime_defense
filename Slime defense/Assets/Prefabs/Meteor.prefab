@@ -377,6 +377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  hittedSlime: {fileID: 0}
   parent: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
   damage: 5
@@ -384,4 +385,5 @@ MonoBehaviour:
   typeOfDamage: 
   level: 0
   burningChance: 0
-  Fire: {fileID: 198690, guid: 18faec2a14493684d905501076799765, type: 3}
+  Fire: {fileID: 7825266107236351994, guid: 7656652d76b3e1c41add4d7ae9e9c4ca, type: 3}
+  createdFire: {fileID: 0}

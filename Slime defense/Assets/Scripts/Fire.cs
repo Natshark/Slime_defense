@@ -19,7 +19,7 @@ public class Fire : MonoBehaviour
         }
         else
         {
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 }

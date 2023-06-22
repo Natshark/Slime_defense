@@ -30,7 +30,7 @@ public class Missile : MonoBehaviour
         }
         else
         {
-            damage = 5 + 5 * level;
+            damage = 6 + 3 * level;
             speed = 0.5f;
             typeOfDamage = "magic";
             burningChance = 0.05f + 0.05f * level;
@@ -60,7 +60,7 @@ public class Missile : MonoBehaviour
             hittedSlime.GetComponent<Slime>().GetDamage(damage, typeOfDamage);
             if (CompareTag("Meteor"))
             {
-                rand = Random.Range(0, 1);
+                rand = Random.Range(0f, 1f);
 
                 if (rand < burningChance)
                 {
