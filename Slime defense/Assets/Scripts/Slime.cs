@@ -13,7 +13,6 @@ public class Slime : MonoBehaviour
     public Vector3 currentRoadDestination;
 
     public GameManager GameManager;
-    public GameManager Spawner;
     public GameObject Sword;
     public GameObject target;
     public GameObject Player;
@@ -53,7 +52,7 @@ public class Slime : MonoBehaviour
 
     void Start()
     {
-        numOfWave = Spawner.GetComponent<Spawner>().numOfWave;
+        numOfWave = GameObject.FindGameObjectWithTag("Portal").GetComponent<Spawner>().numOfWave;
         animator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         Sword = GameObject.FindGameObjectWithTag("Sword");
@@ -138,11 +137,11 @@ public class Slime : MonoBehaviour
 
         hp += numOfWave * 5;
         damage += numOfWave;
+        healthBar.maxValue = hp;
     }
 
     void Update()
     {
-        healthBar.maxValue = hp;
         healthBar.value = hp;
 
         if (!isDead)
