@@ -48,7 +48,6 @@ public class PlatformController : MonoBehaviour
                     CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
                     CanvasOfTowerUI.gameObject.transform.GetChild(2).GetComponent<Button>().enabled = false;
                     CanvasOfTowerUI.gameObject.transform.GetChild(3).GetComponent<Button>().enabled = false;
-                    CanvasOfTowerUI.gameObject.transform.GetChild(4).GetComponent<Button>().enabled = false;
 
                     CurrentPlatformParticle.GetComponent<ParticleSystem>().Stop();
                 }
@@ -68,7 +67,6 @@ public class PlatformController : MonoBehaviour
                 CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = true;
                 CanvasOfTowerUI.gameObject.transform.GetChild(2).GetComponent<Button>().enabled = true;
                 CanvasOfTowerUI.gameObject.transform.GetChild(3).GetComponent<Button>().enabled = true;
-                CanvasOfTowerUI.gameObject.transform.GetChild(4).GetComponent<Button>().enabled = true;
                 CurrentPlatformParticle.GetComponent<ParticleSystem>().Play();
             }
 

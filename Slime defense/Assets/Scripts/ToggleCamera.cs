@@ -4,7 +4,6 @@ public class ToggleCamera : MonoBehaviour
 {
     public GameObject Player;
     public GameObject TowerUI;
-    public GameObject PlayerScoreText;
     public Transform PlaceForCamera;
     Vector3 startPosition = new Vector3 (30.18f, 28.5f, 11.2f);
     Quaternion startRotation;
@@ -12,7 +11,6 @@ public class ToggleCamera : MonoBehaviour
     void Start()
     {
         startRotation = transform.rotation;
-        PlayerScoreText.SetActive(false);
     }
 
     void Update()
@@ -36,7 +34,6 @@ public class ToggleCamera : MonoBehaviour
     public void firstFaceView()
     {
         canvasActivity = TowerUI.GetComponent<Canvas>().enabled;
-        PlayerScoreText.SetActive(true);
 
         transform.parent = Player.transform;
         transform.localRotation = Quaternion.Euler(0, 0, 0);
@@ -56,7 +53,6 @@ public class ToggleCamera : MonoBehaviour
         transform.position = startPosition;
         transform.rotation = startRotation;
 
-        PlayerScoreText.SetActive(false);
         GetComponent<CameraRotation>().enabled = false;
         Player.GetComponent<PlayerMovement>().enabled = false;
         TowerUI.GetComponent<Canvas>().enabled = canvasActivity;

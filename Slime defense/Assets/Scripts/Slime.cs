@@ -34,7 +34,6 @@ public class Slime : MonoBehaviour
     public float damage;
     public float damageToHome;
     public float speed;
-    public int score;
 
     public float timeToDeath = 1.5f;
     public float attackCoolDown = 2f;
@@ -61,7 +60,6 @@ public class Slime : MonoBehaviour
         if (CompareTag("RedSlime"))
         {
             hp = 20;
-            score = 10;
             physicResistance = 0;
             magicResistance = 0;
             damage = 20;
@@ -73,7 +71,6 @@ public class Slime : MonoBehaviour
         else if (CompareTag("BlueSlime"))
         {
             hp = 40;
-            score = 20;
             physicResistance = 0.75f;
             magicResistance = -0.25f;
             damage = 50;
@@ -85,7 +82,6 @@ public class Slime : MonoBehaviour
         else if (CompareTag("GreenSlime"))
         {
             hp = 30;
-            score = 30;
             physicResistance = -0.25f;
             magicResistance = 0.5f;
             damage = 0;
@@ -303,7 +299,6 @@ public class Slime : MonoBehaviour
         target = null;
 
         GameManager.PlayerMoney += slimePrice;
-        GameManager.PlayerScore += score;
 
         navMeshAgent.speed = 0;
     }
