@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
@@ -7,9 +9,16 @@ public class Menu : MonoBehaviour
     public GameObject[] slides;
     public GameObject howToPlayUI;
 
+    public Text HighScore;
+
     void Start()
     {
         Time.timeScale = 1.0f;
+
+        if (PlayerPrefs.HasKey("HighScore"))
+        {
+            HighScore.text = Convert.ToString(PlayerPrefs.GetInt("HighScore"));
+        }
     }
     public void Play() 
     {
