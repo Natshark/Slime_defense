@@ -16,6 +16,8 @@ public class TowerController : MonoBehaviour
     public bool hasTarget = false;
 
     public float attackCoolDown;
+    public float machineGunChance;
+    float rand;
     public float timer = 0;
     public int level = 1;
 
@@ -30,6 +32,7 @@ public class TowerController : MonoBehaviour
         if (CompareTag("CannonTower"))
         {
             attackCoolDown = 0.75f;
+            machineGunChance = 0.1f * (level - 1);
         }
         else if (CompareTag("MagicTower"))
         {
@@ -63,7 +66,24 @@ public class TowerController : MonoBehaviour
                 {
                     timer = attackCoolDown;
                     createdMissile = Instantiate(missile, placeForMissile.position, Quaternion.identity);
-                    if (!createdMissile.CompareTag("Lightning"))
+
+                    if (CompareTag("CannonTower"))
+                    {
+                        createdMissile.GetComponent<Missile>().target = target;
+                        createdMissile.GetComponent<Missile>().parent = gameObject;
+
+                        if (attackCoolDown == 0.75f)
+                        {
+                            rand = Random.Range(0f, 1f);
+
+                            if (rand < machineGunChance)
+                            {
+                                attackCoolDown = 0.25f;
+                                Invoke("resetCoolDown", 3);
+                            }
+                        }
+                    }
+                    else if (CompareTag("MagicTower"))
                     {
                         createdMissile.GetComponent<Missile>().target = target;
                         createdMissile.GetComponent<Missile>().parent = gameObject;
@@ -117,4 +137,8 @@ public class TowerController : MonoBehaviour
         }
     }
 
+    void resetCoolDown()
+    {
+        attackCoolDown = 0.75f;
+    }
 }

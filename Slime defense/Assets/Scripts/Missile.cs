@@ -15,6 +15,7 @@ public class Missile : MonoBehaviour
     public string typeOfDamage;
     public int level;
     public float burningChance;
+    public float machineGunChance;
     public GameObject Fire;
     public GameObject createdFire;
 
@@ -33,7 +34,7 @@ public class Missile : MonoBehaviour
             damage = 6 + 3 * level;
             speed = 0.5f;
             typeOfDamage = "magic";
-            burningChance = 0.05f + 0.05f * level;
+            burningChance = 0.1f * (level - 1);
         }
     }
 
@@ -58,7 +59,8 @@ public class Missile : MonoBehaviour
         {
             hittedSlime = other.gameObject;
             hittedSlime.GetComponent<Slime>().GetDamage(damage, typeOfDamage);
-            if (CompareTag("Meteor"))
+
+            if (CompareTag("Meteor") && !hittedSlime.GetComponent<Slime>().isBurning)
             {
                 rand = Random.Range(0f, 1f);
 
