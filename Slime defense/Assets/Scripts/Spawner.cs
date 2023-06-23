@@ -37,7 +37,7 @@ public class Spawner : MonoBehaviour
         slimeBossSpawnCoolDown = 10;
         timer = slimeSpawnCoolDown;
         slimeCounter = 20;
-        numOfWave = 6;
+        numOfWave = 1;
 
         setSlimeChanses();
         setWaveEndChanses();

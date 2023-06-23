@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1.0f;
         Camera.main.GetComponent<AudioListener>().enabled = true;
 
-        PlayerMoney = 1000000;
+        PlayerMoney = 100;
         upgradePrice = 100;
         isPaused = false;
         isHeroMenu = false;
