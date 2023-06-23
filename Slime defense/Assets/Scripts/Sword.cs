@@ -5,10 +5,16 @@ using UnityEngine;
 public class Sword : MonoBehaviour
 {
     public GameObject Player;
+    public int numOfWave;
     public GameObject LastHittedSlime;
 
-    public int damage = 5;
+    public float damage;
     public string typeOfDamage = "physic";
+
+    private void Start()
+    {
+        damage = 5;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == 11 && Player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).fullPathHash.ToString() == "1011701323")

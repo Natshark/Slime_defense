@@ -12,6 +12,7 @@ public class Spawner : MonoBehaviour
     public GameObject greenSlimeBoss;
     public GameObject chosenSlime;
     public GameObject createdSlime;
+    public GameObject GameManager;
 
 
     List<float> slimeChanses = new List<float> { };
@@ -77,6 +78,10 @@ public class Spawner : MonoBehaviour
                 timer = 30;
                 slimeCounter = 20;
                 numOfWave++;
+                if (GameManager.gameObject.GetComponent<GameManager>().homeHp < 100)
+                {
+                    GameManager.gameObject.GetComponent<GameManager>().homeHp += 5;
+                }
                 setSlimeChanses();
                 setWaveEndChanses();
             } 

@@ -92,19 +92,19 @@ public class Slime : MonoBehaviour
             physicResistance = -0.25f;
             magicResistance = 0.5f;
             damage = 0;
-            damageToHome = 30;
+            damageToHome = 20;
             slimePrice = 25;
             minAttackDist = 0;
             speed = 4.5f;
             attackCoolDown = 100f;
         }
-        else if (CompareTag("RedSlimeBoss"))// угол дороги рампу добавить
+        else if (CompareTag("RedSlimeBoss"))
         {
             hp = 500;
             physicResistance = 0;
             magicResistance = 0;
             damage = 75;
-            damageToHome = 50;
+            damageToHome = 25;
             slimePrice = 50;
             minAttackDist = 3.5f;
             speed = 1.5f;
@@ -116,7 +116,7 @@ public class Slime : MonoBehaviour
             physicResistance = 0.95f;
             magicResistance = -0.25f;
             damage = 100;
-            damageToHome = 75;
+            damageToHome = 30;
             slimePrice = 75;
             minAttackDist = 4f;
             speed = 1f;
@@ -128,7 +128,7 @@ public class Slime : MonoBehaviour
             physicResistance = -0.25f;
             magicResistance = 0.95f;
             damage = 0;
-            damageToHome = 90;
+            damageToHome = 50;
             slimePrice = 100;
             minAttackDist = 0;
             speed = 2f;
@@ -254,6 +254,10 @@ public class Slime : MonoBehaviour
                 if (GameManager.homeHp > 0)
                 {
                     GameManager.homeHp -= damageToHome;
+                    if (GameManager.homeHp < 0)
+                    {
+                        GameManager.homeHp = 0;
+                    }
                 }
             }
         }
@@ -339,7 +343,7 @@ public class Slime : MonoBehaviour
 
     void doDamageToShield()
     {
-        Player.GetComponent<Player>().GetDamage(Mathf.Floor(damage / 5));
+        Player.GetComponent<Player>().GetDamage(Mathf.Floor(damage * (1 - Player.GetComponent<Player>().shieldBlock)));
     }
 
     void Death()

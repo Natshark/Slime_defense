@@ -59,6 +59,16 @@ public class PlatformController : MonoBehaviour
                         lastPressedPlatform.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
                     }
                     CurrentPlatformParticle.GetComponent<ParticleSystem>().Play();
+
+                    if (GetComponent<PlatformController>().hasTower)
+                    {
+                        CanvasOfTowerUI.gameObject.transform.GetChild(5).gameObject.SetActive(true);
+                        CanvasOfTowerUI.gameObject.transform.GetChild(5).gameObject.GetComponent<Text>().text = transform.GetChild(1).GetComponent<TowerController>().level.ToString();
+                    }
+                    else
+                    {
+                        CanvasOfTowerUI.gameObject.transform.GetChild(5).gameObject.SetActive(false);
+                    }
                 }
             }
             else
@@ -70,6 +80,16 @@ public class PlatformController : MonoBehaviour
                 CanvasOfTowerUI.gameObject.transform.GetChild(3).GetComponent<Button>().enabled = true;
                 CanvasOfTowerUI.gameObject.transform.GetChild(4).GetComponent<Button>().enabled = true;
                 CurrentPlatformParticle.GetComponent<ParticleSystem>().Play();
+
+                if (hasTower)
+                {
+                    CanvasOfTowerUI.gameObject.transform.GetChild(5).gameObject.SetActive(true);
+                    CanvasOfTowerUI.gameObject.transform.GetChild(5).gameObject.GetComponent<Text>().text = transform.GetChild(1).GetComponent<TowerController>().level.ToString();
+                }
+                else
+                {
+                    CanvasOfTowerUI.gameObject.transform.GetChild(5).gameObject.SetActive(false);
+                }
             }
 
             GameManager.lastPressedPlatform = gameObject;

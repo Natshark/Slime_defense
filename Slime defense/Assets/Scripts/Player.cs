@@ -5,7 +5,8 @@ public class Player : MonoBehaviour
 {
     public Animator animator;
 
-    public float hp = 100;
+    public float hp;
+    public float shieldBlock;
     public bool isDead = false;
 
     public GameObject triggerredSlime = null;
@@ -14,15 +15,19 @@ public class Player : MonoBehaviour
     public float mindist;
     public float curdist;
 
-    public float deathCoolDown = 10f;
+    public float deathCoolDown;
     public float timer;
 
     public Text playerHpText;
     public float hpPerSecond = 1.0f;
-    public float maxHpPlayer = 100.0f;
+    public float maxHpPlayer;
 
     void Start()
     {
+        shieldBlock = 0.75f;
+        maxHpPlayer = 100;
+        hp = maxHpPlayer;
+        deathCoolDown = 15;
         animator = GetComponent<Animator>();
         InvokeRepeating("hpRegeneration", 0, 3);
     }
@@ -74,7 +79,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            hp = 100;
+            hp = maxHpPlayer;
             isDead = false;
 
             animator.speed = 0;
@@ -85,7 +90,7 @@ public class Player : MonoBehaviour
 
     public void hpRegeneration()
     {
-        if (hp < maxHpPlayer)
+        if (hp < maxHpPlayer && !isDead)
         {
             hp += hpPerSecond;
         }

@@ -62,18 +62,18 @@ public class Lightning : MonoBehaviour
             damage = level * 3 * ((num + 1) / (level + 1));
             target.GetComponent<Slime>().GetDamage(damage, typeOfDamage);
             target.GetComponent<Slime>().isStunned = true;
-            Invoke("stunOut", 0.25f + 0.25f * level);
+            Invoke("stunOut", 0.5f);
 
             shockedSlimes.Add(target);
 
             if (num > 0)
             {
-                Invoke("continueLightning", 0.3f - 0.05f * level);
+                Invoke("continueLightning", 0.25f);
                 num -= 1;
             }
         }
 
-        Invoke("Destroy", 0.25f + 0.25f * level);
+        Invoke("Destroy", 0.5f);
     }
 
     void Update()

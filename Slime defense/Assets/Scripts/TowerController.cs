@@ -32,7 +32,14 @@ public class TowerController : MonoBehaviour
         if (CompareTag("CannonTower"))
         {
             attackCoolDown = 1f;
-            machineGunChance = 0.1f * (level - 1);
+            if (level < 3)
+            {
+                machineGunChance = 0.15f * (level - 1);
+            }
+            else
+            {
+                machineGunChance = 0.15f * 2;
+            }
         }
         else if (CompareTag("MagicTower"))
         {

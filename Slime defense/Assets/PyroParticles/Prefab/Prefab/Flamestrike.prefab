@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 429886}
   - component: {fileID: 5413020}
-  - component: {fileID: 13544914}
+  - component: {fileID: 7026454987047235141}
   - component: {fileID: 11483642}
   - component: {fileID: 999213663475379689}
   m_Layer: 8
@@ -51,8 +51,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 90
   m_CollisionDetection: 2
---- !u!135 &13544914
-SphereCollider:
+--- !u!65 &7026454987047235141
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -62,7 +62,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Size: {x: 2, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11483642
 MonoBehaviour:
@@ -89,6 +89,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+  typeOfDamage: magic
+  Fire: {fileID: 7825266107236351994, guid: 7656652d76b3e1c41add4d7ae9e9c4ca, type: 3}
+  createdFire: {fileID: 0}
 --- !u!1 &122740
 GameObject:
   m_ObjectHideFlags: 0

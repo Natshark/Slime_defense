@@ -15,11 +15,15 @@ public class AtackHero : MonoBehaviour
     public GameObject prefabCircle;
     public GameObject createdCircle;
     public GameObject flameStrike;
+    public GameObject createdFlameStrike;
 
     public Text manaText;
 
     public bool is_R_pressed = false;
     public string currentAnimatorState;
+
+    public float sunstrikeDamage;
+    public float sunstrikeScale;
 
     public float manaPlayer = 100.0f;
     public float maxManaPlayer = 100.0f;
@@ -30,6 +34,8 @@ public class AtackHero : MonoBehaviour
 
     void Start()
     {
+        sunstrikeDamage = 20;
+        sunstrikeScale = 1;
         InvokeRepeating("GiveManaPerSecond", 0.0f, 3F);
     }
 
@@ -98,6 +104,7 @@ public class AtackHero : MonoBehaviour
                 if (hittedObject.collider)
                 {
                     createdCircle = Instantiate(prefabCircle, hittedObject.point, Quaternion.identity);
+                    createdCircle.transform.localScale += new Vector3(sunstrikeScale - 1, 0, sunstrikeScale - 1) / 2;
                     is_R_pressed = true;
                 }
             }
@@ -116,7 +123,9 @@ public class AtackHero : MonoBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
                     manaPlayer -= sunstrikePrice;
-                    Instantiate(flameStrike, createdCircle.transform.position, Quaternion.identity);
+                    createdFlameStrike = Instantiate(flameStrike, createdCircle.transform.position, Quaternion.identity);
+                    createdFlameStrike.transform.GetChild(4).GetComponent<FlameStrike>().damage = sunstrikeDamage;
+                    createdFlameStrike.transform.GetChild(4).GetComponent<BoxCollider>().size += new Vector3 (sunstrikeScale - 1, 0, sunstrikeScale - 1);
                     Destroy(createdCircle);
                     is_R_pressed = false;
                     timer = CoolDownHit;

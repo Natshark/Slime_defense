@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public GameObject createdTower;
     public GameObject destroyedTower;
     public GameObject Tower;
+    public GameObject Sword;
+    public GameObject Player;
 
     public Canvas CanvasOfTowerUI;
 
@@ -34,7 +36,7 @@ public class GameManager : MonoBehaviour
     public int magicTowerPrice = 50;
     public int cannonTowerPrice = 30;
     public int teslaTowerPrice = 80;
-    public int upgradePrice = 100;
+    public int upgradePrice;
 
     public float userSensitivity;
     public float gameVolume;
@@ -52,12 +54,20 @@ public class GameManager : MonoBehaviour
     public Text PlayerScoreText;
     public int PlayerScore = 0;
 
+    public Text swordDamageText;
+    public Text sunstrikeDamageText;
+    public Text sunstrikeScaleText;
+    public Text shieldBlockText;
+    public Text heroHpText;
+
+
     void Start()
     {
         Time.timeScale = 1.0f;
         Camera.main.GetComponent<AudioListener>().enabled = true;
 
         PlayerMoney = 100;
+        upgradePrice = 100;
         isPaused = false;
         isHeroMenu = false;
         isSettings = false;
@@ -176,7 +186,7 @@ public class GameManager : MonoBehaviour
         if (hasTower && PlayerMoney >= upgradePrice)
         {
             Tower = lastPressedPlatform.transform.GetChild(1).gameObject;
-            if (Tower.GetComponent<TowerController>().level != 3)
+            if (Tower.GetComponent<TowerController>().level < 3)
             {
                 if (Tower.CompareTag("CannonTower"))
                 {
@@ -195,15 +205,22 @@ public class GameManager : MonoBehaviour
                 createdTower.transform.parent = lastPressedPlatform.transform;
                 Destroy(Tower);
                 PlayerMoney -= upgradePrice;
-
-                CanvasOfTowerUI.enabled = false;
-                CanvasOfTowerUI.gameObject.transform.GetChild(0).GetComponent<Button>().enabled = false;
-                CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
-                CanvasOfTowerUI.gameObject.transform.GetChild(2).GetComponent<Button>().enabled = false;
-                CanvasOfTowerUI.gameObject.transform.GetChild(3).GetComponent<Button>().enabled = false;
-                CanvasOfTowerUI.gameObject.transform.GetChild(4).GetComponent<Button>().enabled = false;
-                lastPressedPlatform.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
+                CanvasOfTowerUI.gameObject.transform.GetChild(5).gameObject.GetComponent<Text>().text = createdTower.GetComponent<TowerController>().level.ToString();
             }
+            else
+            {
+                Tower.GetComponent<TowerController>().level++;
+                PlayerMoney -= upgradePrice;
+                CanvasOfTowerUI.gameObject.transform.GetChild(5).gameObject.GetComponent<Text>().text = Tower.GetComponent<TowerController>().level.ToString();
+            }
+
+            CanvasOfTowerUI.enabled = false;
+            CanvasOfTowerUI.gameObject.transform.GetChild(0).GetComponent<Button>().enabled = false;
+            CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
+            CanvasOfTowerUI.gameObject.transform.GetChild(2).GetComponent<Button>().enabled = false;
+            CanvasOfTowerUI.gameObject.transform.GetChild(3).GetComponent<Button>().enabled = false;
+            CanvasOfTowerUI.gameObject.transform.GetChild(4).GetComponent<Button>().enabled = false;
+            lastPressedPlatform.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
         }
     }
 
@@ -236,6 +253,8 @@ public class GameManager : MonoBehaviour
             CanvasOfTowerUI.gameObject.transform.GetChild(3).GetComponent<Button>().enabled = false;
             CanvasOfTowerUI.gameObject.transform.GetChild(4).GetComponent<Button>().enabled = false;
             lastPressedPlatform.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
+
+            CanvasOfTowerUI.gameObject.transform.GetChild(5).gameObject.SetActive(false);
         }
     }
 
@@ -401,5 +420,64 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetFloat("GameVolume", VolumeSlider.value);
         Camera.main.GetComponent<CameraRotation>().sensetivityMouse = PlayerPrefs.GetFloat("UserSens");
         AudioListener.volume = PlayerPrefs.GetFloat("GameVolume");
+    }
+
+    public void swordDamageUp()
+    {
+        if (PlayerMoney >= 300)
+        {
+            Sword.GetComponent<Sword>().damage += 2.5f;
+            PlayerMoney -= 300;
+            swordDamageText.text = Sword.GetComponent<Sword>().damage.ToString();
+        }
+    }
+
+    public void sunstrikeDamageUp()
+    {
+        if (PlayerMoney >= 300)
+        {
+            Player.GetComponent<AtackHero>().sunstrikeDamage += 5f;
+            PlayerMoney -= 300;
+            sunstrikeDamageText.text = Player.GetComponent<AtackHero>().sunstrikeDamage.ToString();
+
+        }
+    }
+
+    public void sunstrikeScaleUp()
+    {
+        if (PlayerMoney >= 300)
+        {
+            Player.GetComponent<AtackHero>().sunstrikeScale += 0.1f;
+            PlayerMoney -= 300;
+            sunstrikeScaleText.text = Player.GetComponent<AtackHero>().sunstrikeScale.ToString();
+        }
+    }
+
+    public void shieldBlockUp()
+    {
+        if (PlayerMoney >= 300)
+        {
+            if(Player.GetComponent<Player>().shieldBlock < 1)
+            {
+                Player.GetComponent<Player>().shieldBlock = float.Parse((Player.GetComponent<Player>().shieldBlock + 0.01f).ToString("#.##"));
+                PlayerMoney -= 300;
+            }
+            else
+            {
+                Player.GetComponent<Player>().shieldBlock = 1;
+            }
+            shieldBlockText.text = Player.GetComponent<Player>().shieldBlock.ToString();
+        }
+    }
+
+    public void heroHPUp()
+    {
+        if (PlayerMoney >= 300)
+        {
+            Player.GetComponent<Player>().maxHpPlayer += 5f;
+            Player.GetComponent<Player>().hp += 5f;
+            PlayerMoney -= 300;
+            heroHpText.text = Player.GetComponent<Player>().maxHpPlayer.ToString();
+        }
     }
 }
