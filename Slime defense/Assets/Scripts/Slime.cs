@@ -18,6 +18,7 @@ public class Slime : MonoBehaviour
     public GameObject Player;
     public Slider healthBar;
     public GameObject Fire;
+
     public List<Transform> goals;
     public int counter = 0;
     bool hasDestination = false;
@@ -101,6 +102,7 @@ public class Slime : MonoBehaviour
         else if (CompareTag("RedSlimeBoss"))
         {
             hp = 500;
+            score = 100;
             physicResistance = 0;
             magicResistance = 0;
             damage = 75;
@@ -113,6 +115,7 @@ public class Slime : MonoBehaviour
         else if (CompareTag("BlueSlimeBoss"))
         {
             hp = 400;
+            score = 150;
             physicResistance = 0.95f;
             magicResistance = -0.25f;
             damage = 100;
@@ -125,6 +128,7 @@ public class Slime : MonoBehaviour
         else if (CompareTag("GreenSlimeBoss"))
         {
             hp = 300;
+            score = 200;
             physicResistance = -0.25f;
             magicResistance = 0.95f;
             damage = 0;

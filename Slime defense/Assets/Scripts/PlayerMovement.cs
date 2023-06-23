@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 animator.Play("MoveFWD_Battle_InPlace_SwordAndShield");
             }
-            else if (currentAnimatorState != "1011701323" && currentAnimatorState != "-1550725538") // currentAnimatorState != "-86853306"
+            else if (currentAnimatorState != "1011701323" && currentAnimatorState != "-1550725538")
             {
                 animator.speed = 0;
                 animator.Play("Idle_Battle_SwordAndShield");
@@ -46,7 +46,6 @@ public class PlayerMovement : MonoBehaviour
         // Проверка на зажатие
         if (Input.GetKey(KeyCode.W)) 
         {
-            // Текущая позиция объекта скрипта += вектор вперед * скорость * deltaTime
             rb.AddForce(transform.forward * speed * Time.deltaTime);
             isMoving = true;
         }

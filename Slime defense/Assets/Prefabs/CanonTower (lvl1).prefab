@@ -167,7 +167,10 @@ MonoBehaviour:
   placeForMissile: {fileID: 2667945300218126271}
   hasTarget: 0
   attackCoolDown: 0.75
+  machineGunChance: 0
+  rand: 0
   timer: 0
+  level: 1
   minDistance: Infinity
   curDistance: 0
   targets: []

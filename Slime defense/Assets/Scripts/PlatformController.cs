@@ -31,7 +31,7 @@ public class PlatformController : MonoBehaviour
         lastPressedPlatform = GameManager.lastPressedPlatform;
     }
 
-    public void ParticleContoller()
+    public void ParticleContoller() // вкл и выкл частиц в зависимости от нажатий на платформы
     {
         // ѕроверка на паузе ли игра
         if (Time.timeScale == 0f) { return; }

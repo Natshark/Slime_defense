@@ -17,7 +17,7 @@ public class TowerController : MonoBehaviour
 
     public float attackCoolDown;
     public float machineGunChance;
-    float rand;
+    public float rand;
     public float timer = 0;
     public int level = 1;
 
@@ -32,13 +32,9 @@ public class TowerController : MonoBehaviour
         if (CompareTag("CannonTower"))
         {
             attackCoolDown = 1f;
-            if (level < 3)
+            if (level <= 3)
             {
                 machineGunChance = 0.15f * (level - 1);
-            }
-            else
-            {
-                machineGunChance = 0.15f * 2;
             }
         }
         else if (CompareTag("MagicTower"))
@@ -67,11 +63,11 @@ public class TowerController : MonoBehaviour
             }
             else
             {
-                direction = target.transform.position - transform.position;
+                direction = target.transform.position - transform.position; // поворот к цели
                 direction.y = 0;
                 rotatableObject.transform.rotation = Quaternion.Slerp(rotatableObject.transform.rotation, Quaternion.LookRotation(direction), 5 * Time.deltaTime);
 
-                if (timer <= 0)
+                if (timer <= 0) // создание снаряда
                 {
                     timer = attackCoolDown;
                     createdMissile = Instantiate(missile, placeForMissile.position, Quaternion.identity);
@@ -81,9 +77,9 @@ public class TowerController : MonoBehaviour
                         createdMissile.GetComponent<Missile>().target = target;
                         createdMissile.GetComponent<Missile>().parent = gameObject;
 
-                        if (attackCoolDown == 0.75f)
+                        if (attackCoolDown == 1f)
                         {
-                            rand = Random.Range(0f, 1f);
+                            rand = Random.Range(0.0f, 1.0f);
 
                             if (rand < machineGunChance)
                             {
@@ -106,7 +102,7 @@ public class TowerController : MonoBehaviour
             }
         }
 
-        target = null;
+        target = null; // нахождение ближайшей цели
         realTargets.Clear();
         foreach (GameObject slime in targets)
         {
@@ -130,7 +126,7 @@ public class TowerController : MonoBehaviour
         timer -= Time.deltaTime;
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other) // добавление целей в список
     {
         if (other.gameObject.layer == 11 && !targets.Contains(other.gameObject))
         {
@@ -138,7 +134,7 @@ public class TowerController : MonoBehaviour
         }
     }
 
-    void OnTriggerExit(Collider other)
+    void OnTriggerExit(Collider other) // удаление целей из списка
     {
         if (other.gameObject.layer == 11 && targets.Contains(other.gameObject))
         {

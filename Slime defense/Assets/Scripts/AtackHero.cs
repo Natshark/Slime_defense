@@ -47,7 +47,7 @@ public class AtackHero : MonoBehaviour
 
         if (Camera.main.transform.parent != null && Time.timeScale != 0f)
         {
-            if (Input.GetMouseButton(1) && currentAnimatorState != "-86853306" && currentAnimatorState != "1011701323")
+            if (Input.GetMouseButton(1) && currentAnimatorState != "-86853306" && currentAnimatorState != "1011701323") // проверки текущих анимаций
             {
                 Defend();
             }
@@ -97,7 +97,7 @@ public class AtackHero : MonoBehaviour
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(ray, out hittedObject, Mathf.Infinity, 1 << 8);
 
-        if (Input.GetKeyDown(KeyCode.R) && manaPlayer >= sunstrikePrice)
+        if (Input.GetKeyDown(KeyCode.R) && manaPlayer >= sunstrikePrice) // создание круга (для наведения магией)
         {
             if (!is_R_pressed)
             {

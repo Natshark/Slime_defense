@@ -66,13 +66,13 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1.0f;
         Camera.main.GetComponent<AudioListener>().enabled = true;
 
-        PlayerMoney = 100;
+        PlayerMoney = 1000000;
         upgradePrice = 100;
         isPaused = false;
         isHeroMenu = false;
         isSettings = false;
 
-        if (PlayerPrefs.HasKey("UserSens"))
+        if (PlayerPrefs.HasKey("UserSens")) // считываем и устанавливаем выставленные пользователем настройки
         {
             Camera.main.GetComponent<CameraRotation>().sensetivityMouse = PlayerPrefs.GetFloat("UserSens");
         }
@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
             GameLose();
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape) && !isHeroMenu)
+        if (Input.GetKeyDown(KeyCode.Escape) && !isHeroMenu)  // вкл/выкл пауза
         {
             if (isPaused)
             {
@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.H) && !isPaused)
+        if (Input.GetKeyDown(KeyCode.H) && !isPaused)  // вкл/выкл меню улучшений
         {
             if (isHeroMenu)
             {
@@ -125,7 +125,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void createMagicTower()
+    public void createMagicTower() // функции для создания башен
     {
         if (!hasTower && PlayerMoney >= magicTowerPrice)
         {
@@ -134,13 +134,7 @@ public class GameManager : MonoBehaviour
             createdTower = Instantiate(magicTower, lastPressedPlatform.transform.position, Quaternion.identity);
             createdTower.transform.parent = lastPressedPlatform.transform;
             lastPressedPlatform.GetComponent<PlatformController>().hasTower = true;
-            CanvasOfTowerUI.enabled = false;
-            CanvasOfTowerUI.gameObject.transform.GetChild(0).GetComponent<Button>().enabled = false;
-            CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
-            CanvasOfTowerUI.gameObject.transform.GetChild(2).GetComponent<Button>().enabled = false;
-            CanvasOfTowerUI.gameObject.transform.GetChild(3).GetComponent<Button>().enabled = false;
-            CanvasOfTowerUI.gameObject.transform.GetChild(4).GetComponent<Button>().enabled = false;
-            lastPressedPlatform.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
+            offCanvasOfTowerUI();
         }
     }
 
@@ -153,13 +147,7 @@ public class GameManager : MonoBehaviour
             createdTower = Instantiate(teslaTower, lastPressedPlatform.transform.position, Quaternion.identity);
             createdTower.transform.parent = lastPressedPlatform.transform;
             lastPressedPlatform.GetComponent<PlatformController>().hasTower = true;
-            CanvasOfTowerUI.enabled = false;
-            CanvasOfTowerUI.gameObject.transform.GetChild(0).GetComponent<Button>().enabled = false;
-            CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
-            CanvasOfTowerUI.gameObject.transform.GetChild(2).GetComponent<Button>().enabled = false;
-            CanvasOfTowerUI.gameObject.transform.GetChild(3).GetComponent<Button>().enabled = false;
-            CanvasOfTowerUI.gameObject.transform.GetChild(4).GetComponent<Button>().enabled = false;
-            lastPressedPlatform.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
+            offCanvasOfTowerUI();
         }
     }
     public void createCannonTower()
@@ -171,17 +159,11 @@ public class GameManager : MonoBehaviour
             createdTower = Instantiate(cannonTower, lastPressedPlatform.transform.position, Quaternion.identity);
             createdTower.transform.parent = lastPressedPlatform.transform;
             lastPressedPlatform.GetComponent<PlatformController>().hasTower = true;
-            CanvasOfTowerUI.enabled = false;
-            CanvasOfTowerUI.gameObject.transform.GetChild(0).GetComponent<Button>().enabled = false;
-            CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
-            CanvasOfTowerUI.gameObject.transform.GetChild(2).GetComponent<Button>().enabled = false;
-            CanvasOfTowerUI.gameObject.transform.GetChild(3).GetComponent<Button>().enabled = false;
-            CanvasOfTowerUI.gameObject.transform.GetChild(4).GetComponent<Button>().enabled = false;
-            lastPressedPlatform.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
+            offCanvasOfTowerUI();
         }
     }
 
-    public void upgradeTower()
+    public void upgradeTower() // улучшение башни
     {
         if (hasTower && PlayerMoney >= upgradePrice)
         {
@@ -214,17 +196,11 @@ public class GameManager : MonoBehaviour
                 CanvasOfTowerUI.gameObject.transform.GetChild(5).gameObject.GetComponent<Text>().text = Tower.GetComponent<TowerController>().level.ToString();
             }
 
-            CanvasOfTowerUI.enabled = false;
-            CanvasOfTowerUI.gameObject.transform.GetChild(0).GetComponent<Button>().enabled = false;
-            CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
-            CanvasOfTowerUI.gameObject.transform.GetChild(2).GetComponent<Button>().enabled = false;
-            CanvasOfTowerUI.gameObject.transform.GetChild(3).GetComponent<Button>().enabled = false;
-            CanvasOfTowerUI.gameObject.transform.GetChild(4).GetComponent<Button>().enabled = false;
-            lastPressedPlatform.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
+            offCanvasOfTowerUI();
         }
     }
 
-    public void destroyTower()
+    public void destroyTower() // разрушение башни
     {
         if (hasTower)
         {
@@ -246,13 +222,7 @@ public class GameManager : MonoBehaviour
             Destroy(destroyedTower);
             lastPressedPlatform.GetComponent<PlatformController>().hasTower = false;
             hasTower = false;
-            CanvasOfTowerUI.enabled = false;
-            CanvasOfTowerUI.gameObject.transform.GetChild(0).GetComponent<Button>().enabled = false;
-            CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
-            CanvasOfTowerUI.gameObject.transform.GetChild(2).GetComponent<Button>().enabled = false;
-            CanvasOfTowerUI.gameObject.transform.GetChild(3).GetComponent<Button>().enabled = false;
-            CanvasOfTowerUI.gameObject.transform.GetChild(4).GetComponent<Button>().enabled = false;
-            lastPressedPlatform.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
+            offCanvasOfTowerUI();
 
             CanvasOfTowerUI.gameObject.transform.GetChild(5).gameObject.SetActive(false);
         }
@@ -392,7 +362,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1.0f;
     }
 
-    public void GameLose()
+    public void GameLose() // обработка проигрыша
     {
         if ((!PlayerPrefs.HasKey("HighScore")) || (PlayerPrefs.GetInt("HighScore") < PlayerScore)) 
         {
@@ -422,7 +392,7 @@ public class GameManager : MonoBehaviour
         AudioListener.volume = PlayerPrefs.GetFloat("GameVolume");
     }
 
-    public void swordDamageUp()
+    public void swordDamageUp() // функции улучшения способностей
     {
         if (PlayerMoney >= 300)
         {
@@ -479,5 +449,16 @@ public class GameManager : MonoBehaviour
             PlayerMoney -= 300;
             heroHpText.text = Player.GetComponent<Player>().maxHpPlayer.ToString();
         }
+    }
+
+    void offCanvasOfTowerUI()
+    {
+        CanvasOfTowerUI.enabled = false;
+        CanvasOfTowerUI.gameObject.transform.GetChild(0).GetComponent<Button>().enabled = false;
+        CanvasOfTowerUI.gameObject.transform.GetChild(1).GetComponent<Button>().enabled = false;
+        CanvasOfTowerUI.gameObject.transform.GetChild(2).GetComponent<Button>().enabled = false;
+        CanvasOfTowerUI.gameObject.transform.GetChild(3).GetComponent<Button>().enabled = false;
+        CanvasOfTowerUI.gameObject.transform.GetChild(4).GetComponent<Button>().enabled = false;
+        lastPressedPlatform.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
     }
 }

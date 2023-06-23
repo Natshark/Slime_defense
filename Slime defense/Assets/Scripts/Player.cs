@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
         hp = maxHpPlayer;
         deathCoolDown = 15;
         animator = GetComponent<Animator>();
-        InvokeRepeating("hpRegeneration", 0, 3);
+        InvokeRepeating("hpRegeneration", 0, 1);
     }
 
     void Update()
@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
             }
             else
             {
-                slimes = GameObject.FindGameObjectsWithTag("RedSlime");
+                slimes = GameObject.FindGameObjectsWithTag("RedSlime"); // поиск ближайшего слайма и его триггерринг
                 mindist = Mathf.Infinity;
                 findSlime();
                 slimes = GameObject.FindGameObjectsWithTag("BlueSlime");

@@ -33,7 +33,7 @@ public class Lightning : MonoBehaviour
         }
         else
         {
-            target = null;
+            target = null; // поиск ближайшей цели
             start = parent.GetComponent<Lightning>().lightningEnd.gameObject;
             num = parent.GetComponent<Lightning>().num;
 
@@ -62,7 +62,7 @@ public class Lightning : MonoBehaviour
             damage = level * 3 * ((num + 1) / (level + 1));
             target.GetComponent<Slime>().GetDamage(damage, typeOfDamage);
             target.GetComponent<Slime>().isStunned = true;
-            Invoke("stunOut", 0.5f);
+            Invoke("stunOut", 0.75f);
 
             shockedSlimes.Add(target);
 
@@ -73,7 +73,7 @@ public class Lightning : MonoBehaviour
             }
         }
 
-        Invoke("Destroy", 0.5f);
+        Invoke("Destroy", 0.75f);
     }
 
     void Update()
